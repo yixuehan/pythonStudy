@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from turtle import *
+import turtle
 
-forward(100)
-left(120)
-forward(100)
-left(120)
-forward(100)
+turtle.forward(100)
+turtle.left(120)
+turtle.forward(100)
+turtle.left(120)
+turtle.forward(100)
