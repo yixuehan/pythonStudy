@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
-func modify(arr [] int){
-    arr[0] = 100
-    fmt.Println("len:", len(arr))
-    fmt.Println("modify:", arr)
+func modify(arr []int) {
+	arr[0] = 100
+	fmt.Println("len:", len(arr))
+	fmt.Println("modify:", arr)
 }
 
 func main(){
