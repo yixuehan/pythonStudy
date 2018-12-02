@@ -6,6 +6,7 @@ def make_pizza(*toppings):
         print(topping)
 
 
+
 make_pizza("abc", "hello", "egg", 10)
 
 
