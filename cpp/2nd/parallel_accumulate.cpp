@@ -46,17 +46,20 @@ T parallel_accumulate(Iterator first, Iterator last, T init)
 
 int main()
 {
-    vector<unsigned int> data(4000000);
+    vector<unsigned int> data(400000000);
     cout << "data count:" << data.size() << "\n";
+    unsigned long long result = 0;
     for (unsigned int i = 0; i < data.size(); ++i) {
         data[i] = i;
     }
     {
         boost::timer::auto_cpu_timer t;
-        parallel_accumulate(data.begin(), data.end(), 0);
+        result = parallel_accumulate(data.begin(), data.end(), 0);
     }
+    cout << result << "\n";
     {
         boost::timer::auto_cpu_timer t;
-        accumulate(data.begin(), data.end(), 0);
+        result = accumulate(data.begin(), data.end(), 0);
     }
+    cout << result << "\n";
 }
