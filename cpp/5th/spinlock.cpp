@@ -11,4 +11,7 @@ int main()
             cout << flag.test_and_set(memory_order_acquire) << "\n";
             });
     t.join();
+
+    atomic<int> i;
+    cout << i.is_lock_free() << "\n";
 }
