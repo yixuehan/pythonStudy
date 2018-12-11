@@ -3,7 +3,8 @@
 #include <atomic>
 using namespace std;
 
-#include <sched.h>
+//#define _GNU_SOURCE
+//#include <sched.h>
 #include <unistd.h>
 #include <pthread.h>
 
@@ -29,9 +30,15 @@ int b;
 
 void threada()
 {
+    auto thread_id = pthread_self();
     cpu_set_t get;
     CPU_ZERO(&get);
-    auto thread_id = pthread_self();
+    CPU_SET(0, &get);
+    if (pthread_setaffinity_np(thread_id, sizeof(get), &get)) {
+        cout << "threada error\n";
+        exit(1);
+    }
+    CPU_ZERO(&get);
     if (pthread_getaffinity_np(thread_id, sizeof(get), &get)) {
         cout << "threada error\n";
         exit(1);
@@ -49,9 +56,15 @@ void threada()
 
 void threadb()
 {
+    auto thread_id = pthread_self();
     cpu_set_t get;
     CPU_ZERO(&get);
-    auto thread_id = pthread_self();
+    CPU_SET(0, &get);
+    if (pthread_setaffinity_np(thread_id, sizeof(get), &get)) {
+        cout << "threada error\n";
+        exit(1);
+    }
+    CPU_ZERO(&get);
     if (pthread_getaffinity_np(thread_id, sizeof(get), &get)) {
         cout << "threada error\n";
         exit(1);
