@@ -1,6 +1,6 @@
 package main
 import (
-    //"fmt"
+    "fmt"
     "encoding/json"
 )
 
@@ -17,9 +17,13 @@ func main() {
         Address:"long yang",
         Age:30,
     }
-    for i := 0; i < 1000000; i++ {
-        json.Marshal(&person)
+    var ret []byte
+    for i := 0; i < 1; i++ {
+        ret, _ = json.Marshal(&person)
     }
-    //fmt.Println("ret:", string(ret))
+    fmt.Println("ret:", string(ret))
+    person.Address = string(ret)
+    ret, _ = json.Marshal(&person)
+    fmt.Println("ret:", string(ret))
 
 }
