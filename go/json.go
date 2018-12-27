@@ -1,29 +1,36 @@
 package main
+
 import (
-    "fmt"
-    "encoding/json"
+	"encoding/json"
+	"fmt"
 )
 
+// Person ...
 type Person struct {
-    Name string `json:"name"`
-    Address string `json:"address"`
-    Age int `json:"age"`
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Age     int    `json:"age"`
+}
+
+type jsonMap struct {
+	ServiceName string `json:service_name`
 }
 
 func main() {
-    //var ret []byte
-    person := Person {
-        Name:"xiao m",
-        Address:"long yang",
-        Age:30,
-    }
-    var ret []byte
-    for i := 0; i < 1; i++ {
-        ret, _ = json.Marshal(&person)
-    }
-    fmt.Println("ret:", string(ret))
-    person.Address = string(ret)
-    ret, _ = json.Marshal(&person)
-    fmt.Println("ret:", string(ret))
-
+	//var ret []byte
+	str := `{
+	"service_name":"create_job",
+    "algorithm_id": "alg123",
+    "job_type":"CALCULATE",
+    "worktable_name":"test table",
+    "job_description":"test",
+    "platform_throw_in":"zhiziyun",
+    "time_throw_in":"4324324",
+    "download_type":"REPORT",
+    "interface_type":"BOOLEAN"
+    }`
+	j := jsonMap{}
+	err := json.Unmarshal([]byte(str), &j)
+	fmt.Println(err)
+	fmt.Println(j.ServiceName)
 }
