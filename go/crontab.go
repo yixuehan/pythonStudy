@@ -24,10 +24,10 @@ func main() {
 
 	//time.Sleep(time.Second * 5)
 	tm := time.Now()
-	for i := 0; i < 10; i++ {
-		sche, _ := cron.Parse("*/3 * * * * *")
+	for i := 0; i < 50; i++ {
+		sche, _ := cron.Parse("0 0 12 1 * *")
 		tm = sche.Next(tm)
-		fmt.Println("next time:", tm)
+		fmt.Println("next time:", time.Now().Unix(), tm.Unix())
 	}
 
 	c1.Stop()
