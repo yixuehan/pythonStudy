@@ -18,14 +18,17 @@ f.close()
 
 i = 0
 
-ms = []
+ms = members.copy()
+ms.clear()
 
 #ms.append(itchat.search_friends(nickName = 'LHC'))
 
-ms.append(itchat.search_friends(wechatAccount = 'clhc2011'))
-ms.append(itchat.search_friends(wechatAccount = 'jizhonghe2000'))
+
+ms.append(itchat.search_friends(nickName = '何继中 智能焊接机器人'))
+ms.append(itchat.search_friends(nickName = 'LHC'))
 
 print(ms)
+itchat.create_chatroom(ms, 'test backlist')
 
 #os.exit(1)
 
