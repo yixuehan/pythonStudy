@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"time"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -69,4 +70,5 @@ func main() {
 	logger.Info("msg", zap.String("operate", string(byteRes)))
 	SetLogger(logger)
 	LogInOtherFile()
+	time.Sleep(time.Second * 10)
 }
