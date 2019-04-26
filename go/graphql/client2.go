@@ -9,7 +9,7 @@ import (
 )
 
 type ResponseStruct struct {
-	Data_Active struct {
+	DataActive struct {
 		Mid  int32
 		Low  int32
 		High int32
@@ -23,7 +23,7 @@ func main() {
 	// make a request
 	req := graphql.NewRequest(`
     query {
-		data_active{
+		dataActive{
 			mid
 			high
 			low
@@ -45,6 +45,6 @@ func main() {
 	if err := client.Run(ctx, req, &respData); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(respData.Data_Active.Mid)
-	fmt.Println(respData.Data_Active.High)
+	fmt.Println(respData.DataActive.Mid)
+	fmt.Println(respData.DataActive.High)
 }
