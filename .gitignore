@@ -2,4 +2,5 @@
 **/obj
 **/.sconsign.dblite
 **/__pycache__
-**/a.out
+**/*a.out*
+**/*.txt
