@@ -5,7 +5,7 @@ import sqlparse
 
 if __name__ == '__main__':
     sql = '''
-            SELECT *
+            SELECT a.x, b.y
             FROM t_project_job a inner join t_project_project b
             on a.project_id = b.project_id
         '''
