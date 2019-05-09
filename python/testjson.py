@@ -28,4 +28,25 @@ a = json.loads('''
 }
 ''')
 
-print(a)
+# print(a)
+
+
+class Student:
+    def __init__(self):
+        self.name = ""
+        self.age = 15
+        self.sex = "男"
+        self.email = "abc@162.com"
+        self.address = "address test"
+        self.next = None
+
+    def __str__(self):
+        return "%s %s %s %s %s %s" % (self.name, self.age, self.sex, self.email, self.address, self.next)
+
+
+student = Student()
+student.next = Student().__dict__
+print(student.__dict__)
+student2 = Student()
+student2.__dict__ = student.__dict__
+print(student2)
