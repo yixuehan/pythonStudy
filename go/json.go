@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"strconv"
 	//"github.com/buger/jsonparser"
 )
@@ -12,6 +13,16 @@ type Person struct {
 	Name    string `json:"name"`
 	Address string `json:"address"`
 	Age     int    `json:"age"`
+}
+
+type Person2 struct {
+	*Person
+	Hight int `json:"hight"`
+}
+
+type Person3 struct {
+	Hight int `json:"hight"`
+	Body  interface{}
 }
 
 type jsonMap struct {
@@ -49,6 +60,21 @@ func main() {
 		}
 		i++
 	}
+	var person Person2
+	person.Person = &Person{}
+	person.Age = 100
+	bufs, err := json.Marshal(person)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Println(string(bufs))
+	var p3 Person3
+	json.Unmarshal(bufs, &p3)
+	fmt.Println(p3)
+	// var p Person
+	// json.Unmarshal(p3.Body.([]byte), &p)
+	// fmt.Println(p)
 	//for _, v := range j.DataMsg.ColumnsInfo {
 	//	for f, t := range v {
 	//		fmt.Println(f, t)
