@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net"
 	"os"
+
+	"git.ucloudadmin.com/securityhouse/dataflow/pkg/tcp"
 )
 
 func checkError(err error) {
@@ -13,11 +15,28 @@ func checkError(err error) {
 	}
 }
 
+func handle(conn net.Conn) {
+	var buf []byte
+	buf = make([]byte, 4096000)
+	n, _ := tcp.ReadWithLenHead(conn, buf, 8)
+	fmt.Println(n)
+	// time.Sleep(2 * time.Second)
+	conn.Close()
+}
+
+// func handleSignal(c chan os.Signal) {
+// 	// var sig os.Signal
+// 	for {
+// 		<-c
+// 		// fmt.Println(sig.String())
+// 	}
+// }
+
 func main() {
 	service := ":1200"
-	tcpAddr, err := net.ResolveTCPAddr("ip4", service)
+	tcpAddr, err := net.ResolveTCPAddr("tcp4", service)
 	checkError(err)
-	listener, err := net.ListenTCP("tcp", tcpAddr)
+	listener, err := net.ListenTCP("tcp4", tcpAddr)
 	checkError(err)
 
 	for {
@@ -25,7 +44,6 @@ func main() {
 		if err != nil {
 			continue
 		}
-		conn.Read()
-
+		go handle(conn)
 	}
 }

@@ -72,6 +72,16 @@ func main() {
 	var p3 Person3
 	json.Unmarshal(bufs, &p3)
 	fmt.Println(p3)
+	var persons [2]Person
+	persons[0].Age = 10
+	persons[1].Age = 20
+	bufs, err = json.Marshal(persons)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Println(string(bufs))
+
 	// var p Person
 	// json.Unmarshal(p3.Body.([]byte), &p)
 	// fmt.Println(p)

@@ -38,6 +38,15 @@ func String2Time(formatTimeStr string) int64 {
 }
 
 func main() {
+	// t := time.Time{}
+	var t time.Time
+	t2 := time.Time{}
+	fmt.Println(t == t2)
+	fmt.Println(t == time.Time{})
+	if t == time.Time{} {
+		fmt.Println("true")
+	}
+	return
 
 	fmt.Println(GetTimeStr())
 	fmt.Println(GetTimeInt())
