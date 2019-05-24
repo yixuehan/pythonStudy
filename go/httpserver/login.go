@@ -8,34 +8,29 @@ type Login struct {
 	Password string `form:"password" json:"password" xml:"password" binding:"required"`
 }
 
+type resp struct {
+	Status string `json:"status"`
+}
+
 func main() {
 	router := gin.Default()
-	router.POST("/loginJSON", func(c *gin.Context) {
+	router.POST("/login", func(c *gin.Context) {
 		var json Login
 		if err := c.ShouldBindJSON(&json); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
+			if err = c.ShouldBind(&json); err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+				return
+			}
 		}
 
 		if json.User != "manu" || json.Password != "123" {
 			c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"status": "You are logged in"})
+		r := resp{}
+		r.Status = "You are logged in hahaha"
+		c.JSON(http.StatusOK, &r)
 	})
 
-	router.POST("/loginForm", func(c *gin.Context) {
-		var form Login
-		if err := c.ShouldBind(&form); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-
-		if form.User != "manu" || form.Password != "123" {
-			c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
-			return
-		}
-		c.JSON(http.StatusOK, gin.H{"status": "You are logged in"})
-	})
 	router.Run()
 }
