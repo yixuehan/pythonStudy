@@ -1,7 +1,11 @@
 package main
 
-import "github.com/gin-gonic/gin"
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 type Login struct {
 	User     string `form:"user" json:"user" xml:"user" binding:"required"`
@@ -15,15 +19,20 @@ type resp struct {
 func main() {
 	router := gin.Default()
 	router.POST("/login", func(c *gin.Context) {
-		var json Login
-		if err := c.ShouldBindJSON(&json); err != nil {
-			if err = c.ShouldBind(&json); err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-				return
-			}
+		var json1 Login
+		var json2 Login
+		if err := c.ShouldBind(&json1); err != nil {
+			fmt.Println("json1:", err)
+		}
+		//json2.User = json1.User
+
+		if err := c.ShouldBindJSON(&json2); err != nil {
+			fmt.Println("json2:", err)
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
 		}
 
-		if json.User != "manu" || json.Password != "123" {
+		if json2.User != "manu" || json2.Password != "123" {
 			c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
 			return
 		}
