@@ -9,10 +9,16 @@ import (
 )
 
 // Person ...
+// type Person struct {
+// 	Name    string `json:"name"`
+// 	Address string `json:"address"`
+// 	Age     int    `json:"age"`
+// }
+
 type Person struct {
-	Name    string `json:"name"`
-	Address string `json:"address"`
-	Age     int    `json:"age"`
+	Name    string
+	Address string
+	Age     int
 }
 
 type Person2 struct {
@@ -34,7 +40,21 @@ type jsonMap struct {
 	} `json:"dataMsg"`
 }
 
+var p1 = map[string]*Person{}
+var p2 map[string]*Person
+
 func main() {
+	p1["a"] = &Person{"name", "addr1", 10}
+	p1["b"] = &Person{"name2", "addr2", 20}
+	p1["c"] = &Person{"name3", "addr3", 30}
+	p1["d"] = &Person{"name4", "addr3", 40}
+	buf, _ := json.Marshal(p1)
+	fmt.Println(string(buf))
+	json.Unmarshal(buf, &p2)
+	fmt.Println(*p2["a"])
+	p2["a"].Name = "p2"
+	fmt.Println(p3["a"].Name, p2["a"].Name)
+	return
 	//var ret []byte
 	str := `{
 	"service_name":"create_job",

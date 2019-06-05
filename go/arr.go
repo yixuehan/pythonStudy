@@ -9,10 +9,6 @@ func modify(arr []int) {
 }
 
 func testArr(a interface{}) {
-	args := a.(type)(a)
-	for _, arg := range args {
-		fmt.Println(arg)
-	}
 }
 
 func main() {
@@ -28,7 +24,8 @@ func main() {
 	slice_arr = append(slice_arr, slice_arr2...)
 	testArr(slice_arr)
 	slice_arr[0] = 11
-	slice_arr[5] = 55
+	slice_arr[4] = 55
 	fmt.Println("after modify:", arr, slice_arr)
 	fmt.Println("after modify:", arr2, slice_arr2)
+	fmt.Println("len:", len(arr[0:10]))
 }

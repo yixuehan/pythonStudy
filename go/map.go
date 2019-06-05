@@ -13,5 +13,7 @@ func main() {
 	nameAge["xiaozhang"] = 20
 	changeMap(nameAge)
 	fmt.Println(nameAge)
-	fmt.Println("nameAge:", type(nameAge["notexists"]))
+	fmt.Println("nameAge:", nameAge["notexists"])
+	B["xiaoming"] = 20
+	fmt.Println(B["xiaoming"], nameAge["xiaoming"])
 }
