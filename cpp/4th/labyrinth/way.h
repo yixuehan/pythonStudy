@@ -11,11 +11,9 @@ class Way
 public:
     Way(const Labmap &m,
         const Pos &curr
-        // const Pos &next = {0, 0}
         )
         :_map{m},
          _curr{curr},
-         // _next{next},
          _steps{0}
     {
         _passed.insert(_curr);
@@ -57,8 +55,12 @@ public:
         if (_map.labmap[pos.x][pos.y] == _map.barrier)
             return false;
 
+        // if (_map.labmap[pos.x][pos.y] == _map.target)
+        //     return false;
+
         if (_passed.find(pos) != _passed.end())
             return false;
+
 
         return true;
     }

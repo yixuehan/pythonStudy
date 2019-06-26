@@ -14,7 +14,7 @@ struct Pos
     }   
     bool operator<(const Pos &pos) const
     {
-        return x < pos.x || y < pos.y;
+        return x < pos.x || (x == pos.x && y < pos.y);
     }
 };
 

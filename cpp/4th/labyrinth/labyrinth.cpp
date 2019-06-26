@@ -2,6 +2,7 @@
 #include <array>
 #include <vector>
 #include <stack>
+#include <algorithm>
 using namespace std;
 
 #include <boost/timer/timer.hpp>
@@ -9,13 +10,15 @@ using namespace boost;
 
 #include "way.h"
 
+int maxway = 0;
+
 std::vector<Way> min_path(const Way &start)
 {
     std::stack<Way> ways;
     std::vector<Way> result;
-    // for (auto &start : starts)
     ways.push(start);
     while (!ways.empty()) {
+        maxway = std::max<int>(maxway, ways.size());
         auto currway = ways.top();
         ways.pop();
         if (currway.isArrived()) {
@@ -57,12 +60,7 @@ int main()
      {0, 0, 0, 1}
     };
 
-    // Way way1(m, m.start, Up);
-    // Way way2(m, m.start, Down);
-    // Way way3(m, m.start, Left);
-    // Way way4(m, m.start, Right);
     Way start(m, m.start);
-    // auto ress = min_path({way1, way2, way3, way4});
     auto ress = min_path(start);
     for (auto &res : ress) {
         for (auto &pos : res.passed()) {
@@ -70,5 +68,6 @@ int main()
         }
         cout << endl;
     }
+    cout << "max count:" << maxway << endl;
 
 }
