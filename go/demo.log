@@ -1,0 +1,44 @@
+{"level":"info","message":"logger construction succeeded"}
+{"level":"info","message":"log in demo","user":"cc"}
+{"level":"info","message":"logger construction succeeded"}
+{"level":"info","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T12:26:23.649+0600","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T12:26:23.650+0600","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T12:30:06.198+0600","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T12:30:06.198+0600","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T12:30:06.198+0600","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T13:13:04.347+0600","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T13:13:04.349+0600","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T13:13:04.350+0600","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T13:37:48.816+0600","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T13:37:48.816+0600","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-01T13:37:48.816+0600","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T13:37:48.818+0600","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T15:41:17.539+0800","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T15:41:17.539+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-01T15:41:17.539+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T15:41:17.557+0800","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T15:56:05.338+0800","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T15:56:05.338+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T16:02:43.821+0800","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T16:02:43.821+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T08:16:59.022Z","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T08:16:59.022Z","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-01T08:16:59.022Z","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T08:16:59.024Z","message":"msg","operate":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T08:16:59.024Z","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-01T08:19:00.922Z","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-01T08:19:00.922Z","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-01T08:19:00.922Z","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T08:19:00.924Z","message":"msg","operate":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-01T08:19:00.925Z","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-03T14:27:46.900+0800","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-03T14:27:46.900+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-03T14:27:46.900+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-03T14:27:46.910+0800","message":"msg","operate":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-03T14:27:46.910+0800","message":"log in demo","user":"cc"}
+{"level":"info","ts":"2019-04-16T11:35:33.476+0800","message":"logger construction succeeded"}
+{"level":"info","ts":"2019-04-16T11:35:33.483+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"operate","ts":"2019-04-16T11:35:33.483+0800","message":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-16T11:35:33.492+0800","message":"msg","operate":"{\"A\":\"testA\",\"B\":100}"}
+{"level":"info","ts":"2019-04-16T11:35:33.492+0800","message":"log in demo","user":"cc"}

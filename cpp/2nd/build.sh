@@ -6,7 +6,7 @@
 targetType=exec
 
 #指定目标列表  如：test  动态库会自动扩展为libtest.so 静态库同理
-targets="parallel_accumulate"
+targets="parallel_accumulate a"
 
 #指定目标依赖
 #命名规则  目标_ojbs  目标_libs  如:test_objs  test_libs test_includepath

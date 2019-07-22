@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 func changeMap(nameAge map[string]int) {
-	nameAgeLocal := make(nameAge)
-	nameAgeLocal["newname"] = 30
+	nameAge = make(map[string]int)
+	nameAge["newname"] = 30
 }
 
 func main() {
@@ -13,4 +13,7 @@ func main() {
 	nameAge["xiaozhang"] = 20
 	changeMap(nameAge)
 	fmt.Println(nameAge)
+	fmt.Println("nameAge:", nameAge["notexists"])
+	B["xiaoming"] = 20
+	fmt.Println(B["xiaoming"], nameAge["xiaoming"])
 }

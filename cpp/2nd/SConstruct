@@ -1,0 +1,8 @@
+object_list = Object('hello.c')
+print("object list is:%s" % object_list)
+print("Calling Program('hello.c')")
+Library('hello.c')
+print("Calling Program('goodbye.c')")
+SharedLibrary('goodbye.c')
+Library('goodbye.c')
+print("Finished calling Program()")

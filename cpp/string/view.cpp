@@ -8,6 +8,10 @@ using namespace std;
 
 int main()
 {
+    string_view testview("key.pem");
+    printf("%s\n", testview.data());
+    string_view view_copy(testview);
+    printf("%s\n", view_copy.data());
     int const times = 100000;
     {
         std::string str{"foobar"};
