@@ -2,11 +2,24 @@
 # -*- coding: utf-8 -*-
 
 
-def myprint(a, b):
-    print(a, b)
+def add_end(L=None):
+    if L is None:
+        L = []
+    L.append('end')
+    return L
 
 
-a = 10
-b = 20
+print(add_end())
+print(add_end())
+print(add_end())
+print(add_end())
 
-myprint()
+
+def my_add(*nums):
+    res = 0
+    for num in nums:
+        res += num
+    return res
+
+
+print(my_add(1, 2, 3, 7, 9))
