@@ -82,7 +82,7 @@ public:
     }
 
 private:
-    Labmap _map;
+    const Labmap &_map;
     Pos _curr;
     std::set<Pos> _passed;
     std::vector<Pos> _passed_array;
