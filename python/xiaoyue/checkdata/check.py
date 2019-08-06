@@ -7,7 +7,7 @@ import time
 # import numpy as np
 import os
 import json
-import shutil
+# import shutil
 
 
 class Record:
@@ -56,7 +56,7 @@ def is_night(t):
     return t.tm_hour >= 16 or t.tm_hour < 6
 
 
-excel_out_sheet = None
+excel_sheet = None
 
 
 indexlcyh = list(range(1, 15))
@@ -86,6 +86,9 @@ time_next_duration_fccliving_day = 60 * 60
 
 time_duration_fccliving_night = 15 * 60
 time_next_duration_fccliving_night = 30 * 60
+
+
+max_time_duration = 1.5 * 60 * 60
 
 
 repeat_color = PatternFill(fill_type='solid', fgColor='A2CD5A')
@@ -136,20 +139,31 @@ def check_time(last_group, group,
         f.write(s)
         global pos_t, time_color
         pos = pos_t % group[-1].line
-        append_value(excel_out_sheet[pos], s)
-        excel_out_sheet[pos].fill = time_color
+        append_value(excel_sheet[pos], s)
+        excel_sheet[pos].fill = time_color
 
     if group[0].time - last_group[0].time < time_next_duration - 60:
-        s = "行[%d ~ %d] 和上一组时间间隔不足[%ds]实际为[%fs]少了[%dm%fs][%s]\n" % \
+        s = "行[%d ~ %d] 和上一组时间间隔不足[%ds]实际为[%fs]少了[%dm%fs]\n" % \
                 (group[0].line, group[-1].line,
                  time_next_duration, group[0].time - last_group[0].time,
                  int((time_next_duration - group[0].time + last_group[0].time) / 60),
-                 (time_next_duration - group[0].time + last_group[0].time) % 60,
-                 last_group_is_night)
+                 (time_next_duration - group[0].time + last_group[0].time) % 60)
         f.write(s)
         pos = pos_t % group[-1].line
-        append_value(excel_out_sheet[pos], s)
-        excel_out_sheet[pos].fill = time_color
+        append_value(excel_sheet[pos], s)
+        excel_sheet[pos].fill = time_color
+
+    if group[0].time - last_group[0].time > max_time_duration:
+        s = "行[%d ~ %d] 和上一组时间间隔超过[%ds]实际为[%fs]多了[%dm%fs]\n" % \
+                (group[0].line, group[-1].line,
+                 max_time_duration, group[0].time - last_group[0].time,
+                 int((group[0].time - last_group[0].time - max_time_duration) / 60),
+                 (group[0].time - last_group[0].time - max_time_duration) % 60
+                 )
+        f.write(s)
+        pos = pos_t % group[-1].line
+        append_value(excel_sheet[pos], s)
+        excel_sheet[pos].fill = time_color
 
     last_group = group
 
@@ -193,8 +207,8 @@ def check_record(records, index_range, index_begin, index_end,
                         f.write(s)
                         global pos_t, lose_color
                         pos = pos_t % last_record.line
-                        append_value(excel_out_sheet[pos], s)
-                        excel_out_sheet[pos].fill = lose_color
+                        append_value(excel_sheet[pos], s)
+                        excel_sheet[pos].fill = lose_color
                     if len(repeat_record[:-1]) != 0:
                         repeat_ids = [record.work_path_id for record in repeat_record[:-1]]
                         s = "行[%d ~ %d] 有重复[%s]\n" % \
@@ -204,8 +218,8 @@ def check_record(records, index_range, index_begin, index_end,
                         f.write(s)
                         global repeat_color
                         pos = pos_t % last_record.line
-                        append_value(excel_out_sheet[pos], s)
-                        excel_out_sheet[pos].fill = repeat_color
+                        append_value(excel_sheet[pos], s)
+                        excel_sheet[pos].fill = repeat_color
                     repeat_record = [repeat_record[-1]]
                 else:
                     if len(lefts) != 0:
@@ -213,8 +227,8 @@ def check_record(records, index_range, index_begin, index_end,
                                 (group[0].line, group[-1].line, lefts)
                         f.write(s)
                         pos = pos_t % group[-1].line
-                        append_value(excel_out_sheet[pos], s)
-                        excel_out_sheet[pos].fill = repeat_color
+                        append_value(excel_sheet[pos], s)
+                        excel_sheet[pos].fill = repeat_color
                 last_group = group
                 group = repeat_record
                 repeat_record = []
@@ -228,8 +242,8 @@ def check_record(records, index_range, index_begin, index_end,
                 (group[0].line, last_record.line, repeat_ids)
             f.write(s)
             pos = pos_t % last_record.line
-            append_value(excel_out_sheet[pos], s)
-            excel_out_sheet[pos].fill = repeat_color
+            append_value(excel_sheet[pos], s)
+            excel_sheet[pos].fill = repeat_color
         lefts = [i for i in index_range
                  if i not in [record.work_path_id for record in group]]
         if len(lefts) != 0:
@@ -237,8 +251,8 @@ def check_record(records, index_range, index_begin, index_end,
                     (group[0].line, last_record.line, lefts)
             f.write(s)
             pos = pos_t % last_record.line
-            append_value(excel_out_sheet[pos], s)
-            excel_out_sheet[pos].fill = lose_color
+            append_value(excel_sheet[pos], s)
+            excel_sheet[pos].fill = lose_color
 
         check_time(last_group, group, time_duration_day,
                    time_next_duration_day,
@@ -256,8 +270,8 @@ def unique_record(records):
                     (rs[-1].line, record.line, record.work_path_id)
             f.write(s)
             pos = pos_t % record.line
-            append_value(excel_out_sheet[pos], s)
-            excel_out_sheet[pos].fill = repeat_color
+            append_value(excel_sheet[pos], s)
+            excel_sheet[pos].fill = repeat_color
             continue
         rs.append(record)
     return rs
@@ -273,9 +287,7 @@ def load_array(filename):
         return json.load(f, object_pairs_hook=dict)
 
 
-if __name__ == '__main__':
-    excel_file = '巡检记录_20190701-20190729.xlsx'
-    excel_out = '巡检记录_20190701-20190729_out.xlsx'
+def gen_xlsl(excel_file, excel_out):
     excel_arr = excel_file + "_array"
 
     mtime_ori = os.path.getmtime(excel_file)
@@ -283,13 +295,11 @@ if __name__ == '__main__':
 
     lines = []
     records = []
-    shutil.copy(excel_file, excel_out)
-    wb_out = openpyxl.load_workbook(excel_out)
-    excel_out_sheet = wb_out.get_sheet_by_name(wb_out.sheetnames[0])
-    assert excel_out_sheet is not None
+    wb = openpyxl.load_workbook(excel_file)
+    global excel_sheet
+    excel_sheet = wb.get_sheet_by_name(wb.sheetnames[0])
+    assert excel_sheet is not None
     if not os.path.exists(excel_arr) or mtime_ori > mtime_arr:
-        wb = openpyxl.load_workbook(excel_file)
-        print(wb.sheetnames)
         sheet_name = wb.sheetnames[0]
         sheet = wb.get_sheet_by_name(sheet_name)
         for i in range(2, sheet.max_row):
@@ -310,8 +320,8 @@ if __name__ == '__main__':
         if not record.work_path or not record.work_path_id:
             f.write('第[%d]条记录不全，跳过\n' % record.line)
             pos = pos_t % record.line
-            excel_out_sheet[pos] = '记录不全'
-            excel_out_sheet[pos].fill = info_lose_color
+            excel_sheet[pos] = '记录不全'
+            excel_sheet[pos].fill = info_lose_color
             continue
         record.work_path_id = int(record.work_path_id)
         records.append(record)
@@ -352,4 +362,10 @@ if __name__ == '__main__':
                  time_duration_fccliving_night,
                  time_next_duration_fccliving_night)
 
-    wb_out.save("out.xlsx")
+    wb.save(excel_out)
+
+
+if __name__ == '__main__':
+    excel_file = '巡检记录_20190701-20190729.xlsx'
+    excel_out = '巡检记录_20190701-20190729_out.xlsx'
+    gen_xlsl(excel_file, excel_out)
