@@ -291,7 +291,8 @@ def gen_xlsl(excel_file, excel_out):
     excel_arr = excel_file + "_array"
 
     mtime_ori = os.path.getmtime(excel_file)
-    mtime_arr = os.path.getmtime(excel_arr)
+    if os.path.exists(excel_arr):
+        mtime_arr = os.path.getmtime(excel_arr)
 
     lines = []
     records = []
