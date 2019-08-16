@@ -9,8 +9,11 @@ class A:
     def print(self):
         print('A:', self.__x)
 
+    def foo(self):
+        self.print()
 
-class B:
+
+class B(A):
     def __init__(self, x):
         self.__x = x
 
@@ -18,11 +21,11 @@ class B:
         print('B:', self.__x)
 
 
-class C(A, B):
-    def print(self):
-        self.B.print(self)
+# class C(A, B):
+#     def print(self):
+#         self.B.print(self)
 
 
 if __name__ == '__main__':
-    c = C(10)
-    c.print()
+    b = B(10)
+    b.foo()

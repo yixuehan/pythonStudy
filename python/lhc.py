@@ -16,6 +16,8 @@ for m in members:
 
 f.close()
 
+os.sys.exit(1)
+
 i = 0
 
 ms = []

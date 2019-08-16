@@ -3,6 +3,7 @@
 
 
 import wxpy
+import os
 
 bot = wxpy.Bot(console_qr=True, cache_path=True)
 
@@ -18,6 +19,7 @@ my_groups = bot.groups(update=True)
 for my_group in my_groups:
     print(my_group)
 
+os.sys.exit(1)
 
 names = ['何继中 智能焊接机器人', 'LHC', '三栖', '燕儿翩翩飞']
 
