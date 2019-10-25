@@ -1,0 +1,27 @@
+[[fruit]]
+
+name ="apple"
+
+[fruit.physical]
+# 颜色1
+color ="red"
+
+shape ="round"
+
+[[fruit.variety]]
+
+name ="red delicious"
+
+[[fruit.variety]]
+
+name ="granny smith"
+
+[[fruit]]
+# 姓名1
+
+name ="banana"
+
+[[fruit.variety]]
+# 姓名2
+
+name ="plantain"
