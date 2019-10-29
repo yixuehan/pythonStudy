@@ -1,27 +1,10 @@
-[[fruit]]
+[[arr]]
+ a = 10
+ b = 20
 
-name ="apple"
-
-[fruit.physical]
-# 颜色1
-color ="red"
-
-shape ="round"
-
-[[fruit.variety]]
-
-name ="red delicious"
-
-[[fruit.variety]]
-
-name ="granny smith"
-
-[[fruit]]
-# 姓名1
-
-name ="banana"
-
-[[fruit.variety]]
-# 姓名2
-
-name ="plantain"
+[[arr]]
+a = 20
+b = 40
+[children]
+   m = "abc"
+   n = 123

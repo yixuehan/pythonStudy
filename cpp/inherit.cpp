@@ -1,10 +1,6 @@
 #include <iostream>
 using namespace std;
 
-#include <boost/timer/timer.hpp>
-using namespace boost;
-
-
 class A
 {
 public:
@@ -18,6 +14,16 @@ public:
     {
         print();
     }
+
+    virtual void fn()
+    {
+        printObj();
+    }
+
+    static void printObj()
+    {
+        cout << "obj a" << endl;
+    }
 };
 
 class B : public A
@@ -30,10 +36,22 @@ public:
         cout << "B::print" << endl;
     }
 
+    virtual void fn()
+    {
+        printObj();
+    }
+
+
+    static void printObj()
+    {
+        cout << "obj b" << endl;
+    }
+
 };
 
 int main()
 {
     B b;
     b.foo();
+    b.fn();
 }

@@ -4,7 +4,6 @@
 import toml
 
 t = toml.load("a.toml")
-print(t['fruit'])
-print("*" * 20)
+print(t)
 
 print(toml.dumps(t))
