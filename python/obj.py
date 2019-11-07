@@ -35,6 +35,10 @@ class A:
         return json.dumps(m)
 
 
+def fn():
+    pass
+
+
 if __name__ == '__main__':
     a1 = A("name1")
     a2 = A("name2")
@@ -46,3 +50,6 @@ if __name__ == '__main__':
         # print("true")
 
     print(a1.to_json())
+    print(type(A))
+    print(type(a1))
+    print(type(fn))
