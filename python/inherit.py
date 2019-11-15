@@ -15,6 +15,7 @@ class A:
 
 class B(A):
     def __init__(self, x):
+        A.__init__(self, x)
         self.__x = x
 
     def print(self):
