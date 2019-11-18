@@ -10,4 +10,5 @@ int main()
     cout << a << endl;
     a >>= 1;
     cout << a << endl;
+    cout << int('\u0001') << endl;
 }

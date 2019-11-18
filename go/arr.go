@@ -28,4 +28,15 @@ func main() {
 	fmt.Println("after modify:", arr, slice_arr)
 	fmt.Println("after modify:", arr2, slice_arr2)
 	fmt.Println("len:", len(arr[0:10]))
+
+	fmt.Println("***********************************")
+	var arrss [][10]int32
+	fmt.Println("len ss:", len(arrss))
+	arrss = append(arrss, [10]int32{1, 2})
+	arrss = append(arrss, [10]int32{11, 12})
+	fmt.Println(arrss[0][0])
+	fmt.Println("len ss:", len(arrss))
+	arrss = arrss[1:]
+	fmt.Println("len ss:", len(arrss))
+	fmt.Println(arrss[0][0])
 }
