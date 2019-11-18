@@ -7,11 +7,12 @@ class A:
         self.__x = x
         self.__a = 'a'
 
-    def print(self):
+    def my_print(self):
         print('A:', self.__x)
 
     def foo(self):
-        self.print()
+        self.my_print()
+        A.my_print(self)
 
     @property
     def a(self):
@@ -23,8 +24,11 @@ class B(A):
         A.__init__(self, x)
         self.__x = x
 
-    def print(self):
-        print('B:', self.__x, self.__a)
+    def my_print(self):
+        print('B:', self.__x, self.a)
+
+    def foo(self):
+        A.foo(self)
 
 
 # class C(A, B):
