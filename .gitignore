@@ -4,3 +4,5 @@
 **/__pycache__
 **/*a.out*
 **/*.txt
+**/go.mod
+**/go.sum
