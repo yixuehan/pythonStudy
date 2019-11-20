@@ -5,21 +5,12 @@ import (
 	"net"
 	"sync"
 	"time"
+	"token/define"
 )
 
 const (
 	unitSize = 1000
 )
-
-type UserInfo struct {
-	UserID string
-	Conn   net.Conn
-	Index  int32
-}
-
-func (u *UserInfo) sendMsg(msg string) {
-	u.Conn.Write([]byte(msg))
-}
 
 type Array struct {
 	popCount  int32
@@ -30,7 +21,7 @@ type Array struct {
 }
 
 func (a *Array) ConvertIndex(index int32) int32 {
-	index = index - (a.popCount / unitSize * unitSize)
+	index = index - (a.popCount / unitSize * unitSize) + a.popCount%unitSize
 	return index
 }
 
@@ -39,20 +30,10 @@ func (a *Array) Members() [][unitSize]interface{} {
 }
 
 func (a *Array) size() {
-	fmt.Println("capacity:", a.capacity, len(a.memberss)*unitSize)
-}
-
-func (a *Array) donePlayers() int32 {
-	return a.popCount
-}
-
-func (a *Array) allPlayers() int32 {
-	return a.pushCount
+	// fmt.Println("capacity:", a.capacity, len(a.memberss)*unitSize)
 }
 
 func (a *Array) pop() {
-	a.mtx.Lock()
-	defer a.mtx.Unlock()
 	if a.popCount == a.pushCount {
 		return
 	}
@@ -68,12 +49,12 @@ func (a *Array) pop() {
 }
 
 func (a *Array) Pop() {
+	a.mtx.Lock()
+	defer a.mtx.Unlock()
 	a.pop()
 }
 
 func (a *Array) push(arg interface{}) int32 {
-	a.mtx.Lock()
-	defer a.mtx.Unlock()
 	// pushCount = atomic.AddInt32(&(a.pushCount), 1)
 	a.pushCount++
 	if (a.pushCount-1)%unitSize == 0 {
@@ -84,49 +65,78 @@ func (a *Array) push(arg interface{}) int32 {
 	i := index / unitSize
 	j := index % unitSize
 	// fmt.Printf("第[%d]个玩家，位置是[%d][%d]", a.pushCount, i, j)
+	fmt.Printf("push:[%d][%d][%v]\n", i, j, arg)
 	a.memberss[i][j] = arg
 	return a.pushCount
 }
 
 func (a *Array) Push(arg interface{}) int32 {
+	a.mtx.Lock()
+	defer a.mtx.Unlock()
 	return a.push(arg)
+}
+
+func (a *Array) get(index int32) interface{} {
+	indexNew := a.ConvertIndex(index)
+	i := indexNew / unitSize
+	j := indexNew % unitSize
+	fmt.Printf("Get:[%d][%d][%d][%d]\n", index, indexNew, i, j)
+
+	return a.memberss[i][j]
 }
 
 func (a *Array) Get(index int32) interface{} {
 	a.mtx.Lock()
 	defer a.mtx.Unlock()
-	index = a.ConvertIndex(index)
-	i := index / unitSize
-	j := index % unitSize
-	return a.memberss[i][j]
+	return a.get(index)
 }
 
 type Players struct {
 	Array
 }
 
+func (p *Players) donePlayers() int32 {
+	return p.popCount
+}
+
+func (p *Players) allPlayers() int32 {
+	return p.pushCount
+}
+
+func (p *Players) LeftPlayers() int32 {
+	p.mtx.Lock()
+	defer p.mtx.Unlock()
+	return p.leftPlayers()
+}
+func (p *Players) leftPlayers() int32 {
+	// fmt.Printf("push[%d] pop[%d]\n", p.pushCount, p.popCount)
+	return p.pushCount - p.popCount
+}
+
 func (p *Players) GetToken() {
+	p.mtx.Lock()
+	defer p.mtx.Unlock()
+	fmt.Printf("gettoken: push[%d] pop[%d]\n", p.pushCount, p.popCount)
 	if p.popCount == p.pushCount {
 		return
 	}
-	player := p.Get(0).(*UserInfo)
-	player.sendMsg(fmt.Sprintf("token %v", player.Index))
+
+	player := p.get(0).(*define.PlayerInfo)
+	player.SendMsg(fmt.Sprintf("玩家[%d]token [%v]", player.Location, player.Location))
 	player.Conn.Close()
 	p.pop()
 }
 
-func (p *Players) notify() {
+func (p *Players) Notify() {
 	p.mtx.Lock()
 	defer p.mtx.Unlock()
-	for i, players := range p.memberss {
-		for j, player := range players {
-			if int32(i) < p.pushCount/unitSize || int32(j) < p.pushCount%unitSize {
-				member := player.(*UserInfo)
-				msg := fmt.Sprintf("当前排在第[%d]位", member.Index-p.popCount)
-				fmt.Println(msg)
-				member.sendMsg(msg)
-			}
-		}
+	var i int32
+	fmt.Printf("通知排队的[%d]位玩家\n", p.leftPlayers())
+	for i = 0; i < p.leftPlayers(); i++ {
+		player := p.get(i).(*define.PlayerInfo)
+		msg := fmt.Sprintf("玩家[%d]当前排在第[%d]位", player.Location, player.Location-p.popCount)
+		// fmt.Println(msg)
+		player.SendMsg(msg)
 	}
 }
 
@@ -135,14 +145,14 @@ func (p *Players) notify() {
 var players Players
 
 func userHandle(conn net.Conn) {
-	userInfo := &UserInfo{
+	userInfo := &define.PlayerInfo{
 		Conn: conn,
 	}
 	// atomic.AddInt32(&index, 1)
-	userInfo.Index = players.Push(userInfo)
+	userInfo.Location = players.Push(userInfo)
 }
 
-// var userQueue = sync.Map[int32]UserInfo{}
+// var userQueue = sync.Map[int32]define.PlayerInfo{}
 
 func ServerRun() {
 	l, err := net.Listen("tcp", ":8888")
@@ -150,10 +160,11 @@ func ServerRun() {
 		fmt.Printf("%v\n", err)
 		return
 	}
+	run <- 0
 	for {
 		conn, err := l.Accept()
 		if err != nil {
-			fmt.Printf("accept %v\n", err)
+			fmt.Printf("accept 失败:%v\n", err)
 			continue
 		}
 		fmt.Printf("accept 新用户\n")
@@ -163,12 +174,13 @@ func ServerRun() {
 
 func producer() {
 	for {
-		players.Push(&UserInfo{})
+		players.Push(&define.PlayerInfo{})
 	}
 }
 
 func consumer() {
 	for {
+		time.Sleep(time.Second * 1)
 		players.GetToken()
 	}
 }
@@ -177,20 +189,23 @@ func printPlayers() {
 	for {
 		time.Sleep(time.Second * 1)
 		fmt.Printf("共接入[%d]玩家\n", players.allPlayers())
-		fmt.Printf("待处理玩家[%d]\n", players.allPlayers()-players.donePlayers())
+		fmt.Printf("待处理玩家[%d]\n", players.leftPlayers())
 		players.size()
-		players.notify()
+		players.Notify()
 	}
 }
 
+var run = make(chan int, 0)
+
 func main() {
 	fmt.Println("server running...")
+	go ServerRun()
+	<-run
 	for i := 0; i < 1; i++ {
 		// go producer()
 		go consumer()
 	}
 	go printPlayers()
-	ServerRun()
 
 	select {}
 }
