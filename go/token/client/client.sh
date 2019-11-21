@@ -1,12 +1,7 @@
 #!/bin/bash
 
-./client &
-./client &
-./client &
-./client &
-./client &
-./client &
-./client &
-./client &
-./client &
-./client &
+for ((i=1;i<100;i++))
+do
+    ./client &
+done
+wait

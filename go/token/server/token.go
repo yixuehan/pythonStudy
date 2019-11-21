@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
 	"time"
 	"token/define"
 )
@@ -40,7 +41,7 @@ func (t *TokenServer) getToken() {
 			t.playerTokenChan <- fmt.Sprintf("token:%v", t.tokenNum)
 			t.tokenNum++
 		} else {
-			fmt.Printf("token已经满足，暂不生产\n")
+			// fmt.Printf("token已经满足，暂不生产\n")
 			time.Sleep(time.Second * 1)
 		}
 	}
@@ -100,16 +101,16 @@ func (t *TokenServer) Run(addr string) {
 			continue
 		}
 		//fmt.Printf("accept 新用户\n")
-		// go func() {
+		// go func(conn net.Conn) {
 		t.playerChan <- &define.PlayerInfo{
 			Conn: conn,
 		}
-		// }()
+		// }(conn)
 	}
 }
 
 func main() {
-	fmt.Println("server running...")
+	fmt.Printf("server running... pid[%v]\n", os.Getpid())
 	s := TokenServer{}
 	s.Run(":8888")
 }
