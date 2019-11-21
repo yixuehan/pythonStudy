@@ -17,7 +17,7 @@ type PlayerInfo struct {
 }
 
 func (p *PlayerInfo) SendMsg(msg string) {
-	fmt.Printf("sendmsg:%s\n", msg)
+	// fmt.Printf("sendmsg:%s\n", msg)
 	p.Conn.Write([]byte(msg))
 }
 
@@ -32,9 +32,10 @@ func (p *PlayerInfo) Connect(addr string) {
 }
 
 func (p *PlayerInfo) ReceiveToken() (string, error) {
-	buf := make([]byte, 64)
+	buf := make([]byte, 32)
 	// buf := []byte{}
 	for {
+		buf = make([]byte, 32)
 		rb, err := p.Conn.Read(buf)
 		if rb == 0 {
 			fmt.Printf("服务端关闭\n")
@@ -44,11 +45,12 @@ func (p *PlayerInfo) ReceiveToken() (string, error) {
 		}
 		if err == nil {
 			str := string(buf)
-			fmt.Println("receive:", str)
 			if strings.Index(str, "token") != -1 {
 				p.Conn.Close()
 				p.Done = true
 				return str, nil
+			} else {
+				fmt.Println("receive:", str)
 			}
 		} else {
 			p.Conn.Close()
