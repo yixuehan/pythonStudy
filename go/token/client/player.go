@@ -2,17 +2,19 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 	"token/define"
 )
 
-var clientCount int32 = 1000
+var clientCount int32 = 20000
 
 type TokenClient struct {
-	players map[int32]*define.PlayerInfo
-	// tokenFile  *os.File
+	players    map[int32]*define.PlayerInfo
+	tokenFile  *os.File
 	playerNum  int32
 	playerChan chan *define.PlayerInfo
 	doneChan   chan int32
@@ -21,13 +23,13 @@ type TokenClient struct {
 }
 
 func (t *TokenClient) Init() {
-	// var err error
-	// filename := fmt.Sprintf("token_%v.txt", time.Now().UnixNano())
+	var err error
+	filename := fmt.Sprintf("token_%v.txt", time.Now().UnixNano())
 	// filename := fmt.Sprintf("token_%v.txt", os.Getpid())
-	// t.tokenFile, err = os.Create(filename)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	t.tokenFile, err = os.Create(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
 	t.players = make(map[int32]*define.PlayerInfo, 0)
 	t.doneChan = make(chan int32, clientCount)
 	t.stopChan = make(chan bool, 1)
@@ -40,15 +42,15 @@ func (t *TokenClient) ReceiveToken(player *define.PlayerInfo) {
 		fmt.Printf("error %v\n", err)
 	} else {
 		// docker 中直接输出
-		fmt.Printf("%s\n", str)
-		// t.tokenFile.WriteString(fmt.Sprintf("%s\n", str))
+		// fmt.Printf("%s\n", str)
+		t.tokenFile.WriteString(fmt.Sprintf("%s\n", str))
 	}
 	t.doneChan <- player.Location
 }
 
 // 模拟客户端连接
 func (t *TokenClient) ProducePlayer() {
-	// t.tokenFile.WriteString(fmt.Sprintf("生产[%d]个玩家\n", clientCount))
+	t.tokenFile.WriteString(fmt.Sprintf("生产[%d]个玩家\n", clientCount))
 	t.clientNums = clientCount
 	var i int32
 	for i = 0; i < clientCount; i++ {
@@ -62,12 +64,12 @@ func (t *TokenClient) ProducePlayer() {
 			// }()
 		}
 	}
-	// t.tokenFile.WriteString(fmt.Sprintf("生产[%d]个玩家完成\n", clientCount))
+	t.tokenFile.WriteString(fmt.Sprintf("生产[%d]个玩家完成\n", clientCount))
 }
 
 func (t *TokenClient) Stop() {
 	fmt.Printf("模拟关闭\n")
-	// t.tokenFile.Close()
+	t.tokenFile.Close()
 	t.stopChan <- true
 }
 
