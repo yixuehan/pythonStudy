@@ -6,11 +6,11 @@ using namespace std;
 #include <boost/timer/timer.hpp>
 using namespace boost;
 
-template <typename Func, typename ...Args>
+// template <typename Func, typename ...Args>
 class Defer {
 public:
-    Defer(Func &&f, Args && ...args)
-        :_f(std::bind(f, std::forward<Args>(args)...))
+    Defer(function<void()> f)
+        :_f(f)
     {
     }
     ~Defer()
@@ -37,9 +37,21 @@ void test_defer(int &res)
     // f.get();
 }
 
+void func(int &a)
+{
+    cout << "func:" << a << endl;
+}
+
 int main()
 {
     int a = 0;
     test_defer(a);
     cout << "a:" << a << endl;
+    shared_ptr<int> ptr(nullptr, [&](int*){
+            func(a);
+            });
+    a = 22;
+    Defer f([&]{
+            func(a);
+            });
 }

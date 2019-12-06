@@ -43,28 +43,29 @@ typedef struct _list
     ShowFunc show_func;
 } CList;
 
-void default_show_func(const void *data)
+// void default_show_func(const void *data)
+// {
+//     printf("%d ", *(const int*)data);
+// }
+
+void default_copy_func(void *dst, const void *src, size_t size)
 {
-    printf("%d ", *(const int*)data);
+    printf("default copy\n");
+    memcpy(dst, src, size);
 }
 
-void default_copy_func(void *dst, const void *src)
-{
-    memcpy(dst, src, sizeof(int));
-}
-
-int default_compare_func(const void *v1, const void *v2)
-{
-    int i1 = *(const int*)v1;
-    int i2 = *(const int*)v2;
-    if (i1 < i2) return -1;
-    if (i1 == i2) return 0;
-    return 1;
-}
+// int default_compare_func(const void *v1, const void *v2)
+// {
+//     int i1 = *(const int*)v1;
+//     int i2 = *(const int*)v2;
+//     if (i1 < i2) return -1;
+//     if (i1 == i2) return 0;
+//     return 1;
+// }
 
 void init_list(CList *list, int data_size,
         CopyFunc copy_func,
-        CompareFunc compare_func,
+//        CompareFunc compare_func,
         ShowFunc show_func)
 {
     list->head = NULL;
@@ -72,22 +73,20 @@ void init_list(CList *list, int data_size,
     list->length = 0;
     list->data_size = data_size;
 
-    if (!copy_func)
-        copy_func = default_copy_func;
     list->copy_func = copy_func;
-    if (!show_func)
-        show_func = default_show_func;
+        // copy_func = default_copy_func;
     list->show_func = show_func;
-    if (!compare_func)
-        compare_func = default_compare_func;
-    list->compare_func = compare_func;
+        // show_func = default_show_func;
 }
 
 CNode *new_node(CList *list, void *data)
 {
     CNode *node = (CNode*)malloc(sizeof(CNode));
     init_node(node, list->data_size);
-    list->copy_func(node->data, data);
+    if (list->copy_func)
+        list->copy_func(node->data, data);
+    else
+        default_copy_func(node->data, data, list->data_size);
     return node;
 }
 
@@ -252,9 +251,15 @@ CNode *sort_list_node(CList *list, CNode *node)
 }
 
 // 归并排序
-void sort_list(CList *list)
+void sort_list(CList *list, CompareFunc compare_func)
 {
     if (list->length < 2) return;
+    if (!compare_func) {
+        printf("no compare func");
+        return;
+    }
+    list->compare_func = compare_func;
+
     list->head = sort_list_node(list, list->head);
     list->tail = list->head;
     int length = 0;
@@ -269,7 +274,8 @@ void sort_list(CList *list)
 void print_list(CList *list) {
     CNode *node = list->head;
     while (node) {
-        list->show_func(node->data);
+        if (list->show_func)
+            list->show_func(node->data);
         node = node->next;
     }
     printf("\n");
@@ -278,7 +284,8 @@ void print_list(CList *list) {
 void print_list_r(CList *list) {
     CNode *node = list->tail;
     while (node) {
-        list->show_func(node->data);
+        if (list->show_func)
+            list->show_func(node->data);
         node = node->prev;
     }
     printf("\n");

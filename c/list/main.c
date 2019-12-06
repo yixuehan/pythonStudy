@@ -10,10 +10,16 @@ int compare_int(const void *v1, const void *v2)
     return 1;
 }
 
+void show_int(const void *data)
+{
+    printf("%d ", *(const int*)data);
+}
+
 int main()
 {
     CList list;
-    init_list(&list, sizeof(int), NULL, compare_int, NULL);
+    init_list(&list, sizeof(int), NULL, show_int);
+    // init_list(&list, sizeof(int), NULL, NULL);
     srand(time(NULL));
     for (int i = 0; i < 20; ++i) {
         int a = rand() % 1000;
@@ -26,7 +32,7 @@ int main()
     print_list_r(&list);
     printf("------------------sort--------------------------\n");
 
-    sort_list(&list);
+    sort_list(&list, compare_int);
     printf("------------------------------------------------\n");
     print_list(&list);
     printf("r----------------------------------------------r\n");
