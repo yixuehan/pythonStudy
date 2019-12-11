@@ -12,10 +12,12 @@ enum class Result { Unknown, Y, N, C };
 class Node
 {
 public:
+    // 构造对应的结果
 	void push_back(const string& condition, const Result& r)
 	{
 		_decision[condition] = r;
 	}
+    // 获取某个条件对应的结果
 	Result result(const string& condition)
 	{
 		auto iter = _decision.find(condition);
@@ -24,6 +26,7 @@ public:
 		}
 		return iter->second;
 	}
+    // 虚析构，子类正常释放
 	virtual ~Node()
 	{
     }
@@ -31,14 +34,17 @@ private:
 	map<string, Result> _decision;
 };
 
+// 体测
 class PE : public Node
 {
 };
 
+// 排名
 class Rank : public Node
 {
 };
 
+// 综合学科
 class Social : public Node
 {
 };
@@ -50,6 +56,9 @@ public:
 	{
 		init();
 	}
+    // 输入本次的判断条件
+    // 如[P E A]
+    // 输出结果
 	Result result(vector<string> conditions)
 	{
 		// 每个条件一个节点，那么节点和条件数应该相同
@@ -60,6 +69,7 @@ public:
 		if (conditions.size() > _nodes.size()) {
 			cout << "warning! 条件数过多，丢弃多余的条件\n";
 		}
+        // 逐个结点判断，没有得出最终结果则继续
 		for (size_t i = 0; i < _nodes.size(); ++i) {
 			auto r = _nodes[i]->result(conditions[i]);
 			switch (r) {
@@ -93,17 +103,17 @@ public:
 	*/
 	void init()
 	{
-		// PE
+		// PE 第一个结点
 		shared_ptr<Node> node(new PE);
 		node->push_back("P", Result::C);
 		node->push_back("F", Result::N);
 		_nodes.push_back(node);
-		// Rank
+		// Rank  第二个结点
 		node.reset(new Rank);
 		node->push_back("E", Result::C);
 		node->push_back("NE", Result::N);
 		_nodes.push_back(node);
-		// Social
+		// Social  第三个结点
 		node.reset(new Social);
 		node->push_back("A", Result::Y);
 		node->push_back("B", Result::Y);
@@ -112,13 +122,14 @@ public:
 
 	}
 private:
+    // 这棵决策树的结点
 	vector<shared_ptr<Node>> _nodes;
 };
 
+// 获取输入，输入("0")则抛出异常
 string getcin(const string& prompt)
 {
 	string r;
-	// cout << endl;
 	cout << "输入0退出\n";
 	cout << prompt;
 	cin >> r;
@@ -162,6 +173,7 @@ int main()
 		    conditions.push_back(condition);
 		    printResult(dt.result(conditions));
         }
+        // 捕获异常并退出循环
         catch (string &e) {
             cout << e << endl;
             break;
