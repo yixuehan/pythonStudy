@@ -18,6 +18,7 @@ type TokenServer struct {
 	playerLocation int32
 }
 
+// 通知所有玩家当前的排除位置
 func (t *TokenServer) notifyAll() {
 	var i int32
 	for i = 0; i < t.players.Size(); i++ {
@@ -38,6 +39,7 @@ func (t *TokenServer) getToken() {
 		// time.Sleep(time.Millisecond * 10)
 		if t.players.Size() > int32(len(t.playerTokenChan)) {
 			//fmt.Printf("for players[%d] tokens[%d]\n", t.players.Size(), int32(len(t.playerTokenChan)))
+			// 实际可能是向token服务器请求
 			t.playerTokenChan <- fmt.Sprintf("token:%v", t.tokenNum)
 			t.tokenNum++
 		} else {
@@ -102,6 +104,7 @@ func (t *TokenServer) Run(addr string) {
 		}
 		//fmt.Printf("accept 新用户\n")
 		// go func(conn net.Conn) {
+		// 排列处理，如有需要可改为epoll模式，设置keep-alive
 		t.playerChan <- &define.PlayerInfo{
 			Conn: conn,
 		}

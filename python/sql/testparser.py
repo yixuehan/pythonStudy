@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sqlparse
+from util.python.database import mysql
 
 
 def sql_format(sql):
@@ -27,9 +28,11 @@ def sql_parse(sql):
 def parse_table_fields(value_text):
     value_text = value_text.strip(' ()')
     fields = value_text.split(',')
-    print(fields)
+    # print(fields)
     rets = []
     for field in fields:
+        if mysql.contain_keyword(field):
+            continue
         field = field.split()[0]
         field = field.strip(' ``')
         rets.append(field)
@@ -112,12 +115,11 @@ if __name__ == '__main__':
     '''
     for item in sqlparse.split(sql):
         print(item, '@@@@@@@@@@@@')
-    sql = '''
-    update t_task set status = ? where task_id = ?
-    '''
-    sql = '''
-    insert into t_task(task_id, status, model_id, model_name, model_file, model_code_text, model_code_form, model_code_type, model_type, model_ori_filename, user_id, fail_reason, r  esult_url,enable, docker_port, docker_addr, task_type, service_id, log, project_id, sandbox_id, running_token)
-      values(:task_id, :status, :model_id, :model_name, :model_file, :model_code_text, :model_code_form, :model_code_type, :model_type, :model_ori_filename, :user_id, :fail_reason, :result_url,:enable, :docker_port, :docker_addr, :task_type, :service_id, :log, :project_id, :sandbox_id, :running_token)
-    '''
+    # sql = '''
+    # update t_task set status = ? where task_id = ?
+    # '''
+    # sql = '''
+    # insert into t_task(task_id, status, model_id, model_name, model_file, model_code_text, model_code_form, model_code_type, model_type, model_ori_filename, user_id, fail_reason, r  esult_url,enable, docker_port, docker_addr, task_type, service_id, log, project_id, sandbox_id, running_token)
+    #   values(:task_id, :status, :model_id, :model_name, :model_file, :model_code_text, :model_code_form, :model_code_type, :model_type, :model_ori_filename, :user_id, :fail_reason, :result_url,:enable, :docker_port, :docker_addr, :task_type, :service_id, :log, :project_id, :sandbox_id, :running_token)
+    # '''
     sql_parse(sql)
-

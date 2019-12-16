@@ -6,3 +6,4 @@
 **/*.txt
 **/go.mod
 **/go.sum
+**/*.log
