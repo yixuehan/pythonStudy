@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <stdbool.h>
 
+// 双向链表定义
 typedef struct _node
 {
     struct _node *next;
@@ -13,12 +14,14 @@ typedef struct _node
     void *data;
 } CNode;
 
+// 初始化结点
 void init_node(CNode *node, int data_size)
 {
     memset(node, 0, sizeof(CNode));
     node->data = malloc(data_size);
 }
 
+// 释放结点
 void free_node(CNode *node)
 {
     free(node->data);
@@ -43,29 +46,15 @@ typedef struct _list
     ShowFunc show_func;
 } CList;
 
-// void default_show_func(const void *data)
-// {
-//     printf("%d ", *(const int*)data);
-// }
-
+// 默认的拷贝方式就是内存拷贝
 void default_copy_func(void *dst, const void *src, size_t size)
 {
-    printf("default copy\n");
     memcpy(dst, src, size);
 }
 
-// int default_compare_func(const void *v1, const void *v2)
-// {
-//     int i1 = *(const int*)v1;
-//     int i2 = *(const int*)v2;
-//     if (i1 < i2) return -1;
-//     if (i1 == i2) return 0;
-//     return 1;
-// }
-
+// 初始化链表
 void init_list(CList *list, int data_size,
         CopyFunc copy_func,
-//        CompareFunc compare_func,
         ShowFunc show_func)
 {
     list->head = NULL;
@@ -74,11 +63,10 @@ void init_list(CList *list, int data_size,
     list->data_size = data_size;
 
     list->copy_func = copy_func;
-        // copy_func = default_copy_func;
     list->show_func = show_func;
-        // show_func = default_show_func;
 }
 
+// 创建新的结点
 CNode *new_node(CList *list, void *data)
 {
     CNode *node = (CNode*)malloc(sizeof(CNode));
@@ -90,6 +78,7 @@ CNode *new_node(CList *list, void *data)
     return node;
 }
 
+// 头部插入
 void push_front(CList *list, void *data)
 {
     CNode *next = list->head;
@@ -103,6 +92,7 @@ void push_front(CList *list, void *data)
     ++(list->length);
 }
 
+// 尾部插入
 void push_back(CList *list, void *data)
 {
     CNode *prev = list->tail;
@@ -116,6 +106,7 @@ void push_back(CList *list, void *data)
     ++(list->length);
 }
 
+// 指定位置插入
 void insert(CList *list, Iterator iter, void *data)
 {
     if (iter == list->head) {
@@ -134,6 +125,7 @@ void insert(CList *list, Iterator iter, void *data)
     ++(list->length);
 }
 
+// 头部删除
 void pop_front(CList *list)
 {
     if (NULL == list->head) {
@@ -150,6 +142,7 @@ void pop_front(CList *list)
     --(list->length);
 }
 
+// 尾部删除
 void pop_back(CList *list)
 {
     if (NULL == list->tail) {
@@ -166,6 +159,7 @@ void pop_back(CList *list)
     --(list->length);
 }
 
+// 删除节点
 void remove_node(CList *list, Iterator iter)
 {
     if (iter == list->head) {
@@ -182,6 +176,7 @@ void remove_node(CList *list, Iterator iter)
     --(list->length);
 }
 
+// 删除链表
 void clear(CList *list)
 {
     CNode *node = list->head;
@@ -194,6 +189,7 @@ void clear(CList *list)
     list->length = 0;
 }
 
+// 获取中间结点(内部方法)
 CNode *get_mid_node(CNode *node)
 {
     CNode *fast = node;
@@ -207,6 +203,7 @@ CNode *get_mid_node(CNode *node)
     return node;
 }
 
+// 合并链表(内部方法)
 CNode *merge_list_node(CList *list, CNode *l1, CNode *l2)
 {
     CNode head;
@@ -235,7 +232,7 @@ CNode *merge_list_node(CList *list, CNode *l1, CNode *l2)
     return head.next;
 }
 
-
+// 递归排序
 CNode *sort_list_node(CList *list, CNode *node)
 {
     if (!node || !(node->next)) {
@@ -271,6 +268,7 @@ void sort_list(CList *list, CompareFunc compare_func)
     assert (length == list->length);
 }
 
+// 正向遍历
 void print_list(CList *list) {
     CNode *node = list->head;
     while (node) {
@@ -281,6 +279,7 @@ void print_list(CList *list) {
     printf("\n");
 }
 
+// 反向遍历
 void print_list_r(CList *list) {
     CNode *node = list->tail;
     while (node) {
