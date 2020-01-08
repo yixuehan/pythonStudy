@@ -23,8 +23,35 @@ private:
     int a;
     const char* _str;
 };
+
 static_assert(std::is_pod<StringLiteral>::value, "StringLiteral must be POD.");
+
+struct A
+{
+    // A(){}
+    template <typename T>
+    operator T()
+    {
+        return T();
+    }
+    int a;
+    int *p;
+    A &operator =(char c)
+    {
+        return *this;
+    }
+};
+
+struct B : public A
+{
+    B(){}
+};
+
+static_assert(std::is_pod<A>::value, "struct A must bo POD");
+static_assert(std::is_pod<B>::value, "struct B must bo POD");
 
 int main()
 {
+    A a;
+    B b = a;
 }
