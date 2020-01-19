@@ -44,7 +44,7 @@ struct A
 
 struct B : public A
 {
-    B(){}
+    B() = default;
 };
 
 static_assert(std::is_pod<A>::value, "struct A must bo POD");
