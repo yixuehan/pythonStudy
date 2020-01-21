@@ -22,8 +22,9 @@ int main()
 		// 打印gp1和gp2的引用计数
 		//std::cout << "gp1.use_count() = " << gp1.use_count() << std::endl;
 		std::cout << "gp2.use_count() = " << gp2.use_count() << std::endl;
-        Good g3;
-        ptr = g3.shared_from_this();
+        auto g3(new Good);
+        ptr = g3->shared_from_this();
+		std::cout << "gp2.use_count() = " << gp2.use_count() << std::endl;
 	}
     cout << "out scope\n";
 }
