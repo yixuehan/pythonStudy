@@ -22,6 +22,7 @@ inline void from_json(const nlohmann::json &j, A &a)
 
 int main()
 {
+    nlohmann::json::parse("{}");
     nlohmann::json j;
     try {
         j["a"] = 10;
