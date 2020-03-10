@@ -6,6 +6,7 @@ class StringLiteral
 {
 public:
     StringLiteral() = default;
+    // StringLiteral(){}
     StringLiteral(const char* str) : _str(str) {}
 
     void print(int x = 10)
