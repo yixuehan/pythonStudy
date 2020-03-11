@@ -20,6 +20,8 @@ class A:
 
 
 class B(A):
+    name = "nameB"
+
     def __init__(self, x):
         A.__init__(self, x)
         self.__x = x
@@ -39,3 +41,4 @@ class B(A):
 if __name__ == '__main__':
     b = B(10)
     b.foo()
+    print(b.name)
