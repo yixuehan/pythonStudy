@@ -4,14 +4,15 @@ using namespace std;
 class A
 {
 public:
-    A(){}
+    A():_x(10){}
     virtual void print()
     {
         cout << "A::print" << endl;
     }
 
-    void foo()
+    virtual void foo()
     {
+        cout << "A:" << _x << endl;
         print();
     }
 
@@ -24,12 +25,14 @@ public:
     {
         cout << "obj a" << endl;
     }
+private:
+    int _x;
 };
 
 class B : public A
 {
 public:
-    B() {}
+    B() :_x(20){}
 
     void print()
     {
@@ -41,11 +44,18 @@ public:
         printObj();
     }
 
+    // void foo()
+    // {
+    //     cout << _x << endl;
+    // }
+
 
     static void printObj()
     {
         cout << "obj b" << endl;
     }
+private:
+    int _x;
 
 };
 

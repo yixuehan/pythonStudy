@@ -53,7 +53,7 @@ void printFileStat(char const* filename)
 
 void printStat(char const *filename)
 {
-    namespace fs = std::experimental::filesystem;
+    namespace fs = std::filesystem;
     cout << "--------------------filesystem:" << filename << "----------------------\n";
     fs::path p(filename);
     cout << fs::is_directory(p) << endl;
@@ -67,7 +67,7 @@ void printStat(char const *filename)
 
 }
 
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
 int main()
 {
     printFileStat("./a.out");
@@ -81,6 +81,9 @@ int main()
     printStat("a.out");
     printStat("/dev/log");
     cout << fs::current_path() << endl;
-    fs::current_path("/");
+    auto path = fs::current_path();
+    auto path2 = path / "./dir1" / "a.json";
+    cout << path << endl;
+    cout << path2 << endl;
     cout << fs::current_path() << endl;
 }

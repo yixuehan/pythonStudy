@@ -2,9 +2,10 @@
 **/obj
 **/.sconsign.dblite
 **/__pycache__
+**/*pyc
 **/*a.out*
 **/go.mod
 **/go.sum
 **/*.log
-**/core
 **/build
+**/core*
