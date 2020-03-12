@@ -3,7 +3,6 @@
 **/.sconsign.dblite
 **/__pycache__
 **/*a.out*
-**/*.txt
 **/go.mod
 **/go.sum
 **/*.log
