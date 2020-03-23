@@ -19,13 +19,22 @@ void test_log()
 
 int main()
 {
-    spdlog::flush_every(1s);
-    spdlog::set_level(spdlog::level::trace);
-    SPDLOG_INFO("test macro info {}", "fmt info");
-    SPDLOG_TRACE("test macro info {}", "fmt info");
-    SPDLOG_CRITICAL("test critical");
-    spdlog::info("test info");
     auto daily = spdlog::daily_logger_mt("daily", "logs/app.log", 0, 0);
+    spdlog::set_default_logger(daily);
+    spdlog::set_level(spdlog::level::debug);
+    spdlog::set_pattern("[%Y-%m-%d %H:%M:%S.%e][%l][%s:%#]%v");
+    // spdlog::flush_every(0s);
+    spdlog::flush_every(1s);
+
+    while (1) {
+        std::this_thread::sleep_for(1s);
+        SPDLOG_INFO("test macro info {}", "fmt info");
+        SPDLOG_ERROR("test macro info {}", "fmt info");
+        SPDLOG_TRACE("test macro info {}", "fmt info");
+        SPDLOG_CRITICAL("test critical");
+    }
+    spdlog::info("test info");
+    daily = spdlog::daily_logger_mt("daily", "logs/app.log", 0, 0);
     // auto daily = make_shared<spdlog::sinks::daily_file_sink_mt("logs/s.log", 0, 0);
     spdlog::set_default_logger(daily);
     // spdlog::set_pattern("%+");
