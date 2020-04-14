@@ -32,6 +32,7 @@ int main()
         SPDLOG_ERROR("test macro info {}", "fmt info");
         SPDLOG_TRACE("test macro info {}", "fmt info");
         SPDLOG_CRITICAL("test critical");
+        exit(1);
     }
     spdlog::info("test info");
     daily = spdlog::daily_logger_mt("daily", "logs/app.log", 0, 0);

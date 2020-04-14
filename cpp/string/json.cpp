@@ -6,7 +6,6 @@ using namespace std;
 
 #include <nlohmann/json.hpp>
 
-<<<<<<< Updated upstream
 struct B
 {
     int x ;
@@ -25,7 +24,7 @@ struct A
     int a;
     string b;
     B c;
-=======
+
 template <size_t N>
 inline void from_json(const nlohmann::json &j, char (&s)[N])
 {
@@ -36,7 +35,6 @@ struct A
 {
     int a;
     char b[32];
->>>>>>> Stashed changes
 };
 
 inline void from_json(const nlohmann::json &j, A &a)

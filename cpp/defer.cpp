@@ -6,9 +6,9 @@ using namespace std;
 #include <boost/timer/timer.hpp>
 using namespace boost;
 
-template <typename Func, typename ...Args>
 class Defer {
 public:
+    template <typename Func, typename ...Args>
     Defer(Func &&f, Args &&...args)
         :_f(std::bind(std::forward<Func>(f), std::forward<Args>(args)...))
     {
