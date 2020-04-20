@@ -21,6 +21,30 @@ private:
     function<void()> _f;
 };
 
+template <typename Class>
+class Single
+{
+public:
+    std::shared_ptr<Class> operator->()
+    {
+        static std::shared_ptr<Class> ptr = std::make_shared<Class>();
+        return ptr;
+    }
+};
+
+class A
+{
+public:
+    A()
+    {
+        std::cout << "A contruce\n";
+    }
+    void print()
+    {
+        std::cout << (void*)this << endl;
+    }
+};
+
 
 void test_defer(int &res)
 {
@@ -52,4 +76,13 @@ int main()
             });
     a = 22;
     Defer f(func, a);
+    Single<A> a1;
+    a1->print();
+    Single<A> a2;
+    a2->print();
+    std::thread t1([]{
+        Single<A> a3;
+        a3->print();
+            });
+    t1.join();
 }
