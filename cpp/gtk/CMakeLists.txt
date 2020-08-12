@@ -8,9 +8,10 @@ pkg_search_module(GTK REQURIED gtk+-3.0 IMPORTED_TARGET)
 MESSAGE(STATUS ${GTK_LIBRARIES})
 MESSAGE(STATUS ${GTK_INCLUDE_DIRS})
 
-# include_directories(${GTK_INCLUDE_DIRS})
-# link_directories(${GTK_LIBRARIES})
+add_compile_options(-ggdb3)
+include_directories(${GTK_INCLUDE_DIRS})
+link_libraries(${GTK_LIBRARIES})
 
 add_executable(window window.cpp)
-target_link_libraries(window PkgConfig::GTK)
 
+add_executable(example_0 example_0.cpp)
