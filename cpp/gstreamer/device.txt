@@ -1,0 +1,240 @@
+Probing devices...
+
+
+Device found:
+
+	name  : Monitor of 内置音频 模拟立体声
+	class : Audio/Source
+	caps  : audio/x-raw, format=(string){ S16LE, S16BE, F32LE, F32BE, S32LE, S32BE, S24LE, S24BE, S24_32LE, S24_32BE, U8 }, layout=(string)interleaved, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-alaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-mulaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	properties:
+		device.description = "Monitor\ of\ \345\206\205\347\275\256\351\237\263\351\242\221\ \346\250\241\346\213\237\347\253\213\344\275\223\345\243\260"
+		device.class = monitor
+		alsa.card = 0
+		alsa.card_name = "HDA\ Intel\ PCH"
+		alsa.long_card_name = "HDA\ Intel\ PCH\ at\ 0x91210000\ irq\ 131"
+		alsa.driver_name = snd_hda_intel
+		device.bus_path = pci-0000:00:0e.0
+		sysfs.path = /devices/pci0000:00/0000:00:0e.0/sound/card0
+		device.bus = pci
+		device.vendor.id = 8086
+		device.vendor.name = "Intel\ Corporation"
+		device.product.id = 5a98
+		device.product.name = "Celeron\ N3350/Pentium\ N4200/Atom\ E3900\ Series\ Audio\ Cluster"
+		device.form_factor = internal
+		device.string = 0
+		module-udev-detect.discovered = 1
+		device.icon_name = audio-card-pci
+		is-default = false
+	gst-launch-1.0 pulsesrc device=alsa_output.pci-0000_00_0e.0.analog-stereo.monitor ! ...
+
+
+Device found:
+
+	name  : 内置音频 模拟立体声
+	class : Audio/Source
+	caps  : audio/x-raw, format=(string){ S16LE, S16BE, F32LE, F32BE, S32LE, S32BE, S24LE, S24BE, S24_32LE, S24_32BE, U8 }, layout=(string)interleaved, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-alaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-mulaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	properties:
+		alsa.resolution_bits = 16
+		device.api = alsa
+		device.class = sound
+		alsa.class = generic
+		alsa.subclass = generic-mix
+		alsa.name = "ALC269VC\ Analog"
+		alsa.id = "ALC269VC\ Analog"
+		alsa.subdevice = 0
+		alsa.subdevice_name = "subdevice\ \#0"
+		alsa.device = 0
+		alsa.card = 0
+		alsa.card_name = "HDA\ Intel\ PCH"
+		alsa.long_card_name = "HDA\ Intel\ PCH\ at\ 0x91210000\ irq\ 131"
+		alsa.driver_name = snd_hda_intel
+		device.bus_path = pci-0000:00:0e.0
+		sysfs.path = /devices/pci0000:00/0000:00:0e.0/sound/card0
+		device.bus = pci
+		device.vendor.id = 8086
+		device.vendor.name = "Intel\ Corporation"
+		device.product.id = 5a98
+		device.product.name = "Celeron\ N3350/Pentium\ N4200/Atom\ E3900\ Series\ Audio\ Cluster"
+		device.form_factor = internal
+		device.string = front:0
+		device.buffering.buffer_size = 65536
+		device.buffering.fragment_size = 32768
+		device.access_mode = mmap+timer
+		device.profile.name = analog-stereo
+		device.profile.description = "\346\250\241\346\213\237\347\253\213\344\275\223\345\243\260"
+		device.description = "\345\206\205\347\275\256\351\237\263\351\242\221\ \346\250\241\346\213\237\347\253\213\344\275\223\345\243\260"
+		module-udev-detect.discovered = 1
+		device.icon_name = audio-card-pci
+		is-default = true
+	gst-launch-1.0 pulsesrc device=alsa_input.pci-0000_00_0e.0.analog-stereo ! ...
+
+
+Device found:
+
+	name  : 内置音频 模拟立体声
+	class : Audio/Sink
+	caps  : audio/x-raw, format=(string){ S16LE, S16BE, F32LE, F32BE, S32LE, S32BE, S24LE, S24BE, S24_32LE, S24_32BE, U8 }, layout=(string)interleaved, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-alaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	        audio/x-mulaw, rate=(int)[ 1, 384000 ], channels=(int)[ 1, 32 ];
+	properties:
+		alsa.resolution_bits = 16
+		device.api = alsa
+		device.class = sound
+		alsa.class = generic
+		alsa.subclass = generic-mix
+		alsa.name = "ALC269VC\ Analog"
+		alsa.id = "ALC269VC\ Analog"
+		alsa.subdevice = 0
+		alsa.subdevice_name = "subdevice\ \#0"
+		alsa.device = 0
+		alsa.card = 0
+		alsa.card_name = "HDA\ Intel\ PCH"
+		alsa.long_card_name = "HDA\ Intel\ PCH\ at\ 0x91210000\ irq\ 131"
+		alsa.driver_name = snd_hda_intel
+		device.bus_path = pci-0000:00:0e.0
+		sysfs.path = /devices/pci0000:00/0000:00:0e.0/sound/card0
+		device.bus = pci
+		device.vendor.id = 8086
+		device.vendor.name = "Intel\ Corporation"
+		device.product.id = 5a98
+		device.product.name = "Celeron\ N3350/Pentium\ N4200/Atom\ E3900\ Series\ Audio\ Cluster"
+		device.form_factor = internal
+		device.string = front:0
+		device.buffering.buffer_size = 65536
+		device.buffering.fragment_size = 32768
+		device.access_mode = mmap+timer
+		device.profile.name = analog-stereo
+		device.profile.description = "\346\250\241\346\213\237\347\253\213\344\275\223\345\243\260"
+		device.description = "\345\206\205\347\275\256\351\237\263\351\242\221\ \346\250\241\346\213\237\347\253\213\344\275\223\345\243\260"
+		module-udev-detect.discovered = 1
+		device.icon_name = audio-card-pci
+		is-default = true
+	gst-launch-1.0 ... ! pulsesink device=alsa_output.pci-0000_00_0e.0.analog-stereo
+
+
+Device found:
+
+	name  : USB2.0_CAM1: USB2.0_CAM1
+	class : Video/Source
+	caps  : video/x-raw, format=(string)YUY2, width=(int)1920, height=(int)1080, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)5/1;
+	        video/x-raw, format=(string)YUY2, width=(int)1280, height=(int)960, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)5/1;
+	        video/x-raw, format=(string)YUY2, width=(int)1280, height=(int)720, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)1024, height=(int)768, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)800, height=(int)600, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)352, height=(int)288, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)320, height=(int)240, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)160, height=(int)120, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1920, height=(int)1080, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1280, height=(int)960, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1280, height=(int)720, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1024, height=(int)768, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)800, height=(int)600, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)352, height=(int)288, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)320, height=(int)240, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)160, height=(int)120, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	properties:
+		udev-probed = true
+		device.bus_path = pci-0000:00:15.0-usb-0:2.2:1.0
+		sysfs.path = /sys/devices/pci0000:00/0000:00:15.0/usb1/1-2/1-2.2/1-2.2:1.0/video4linux/video0
+		device.bus = usb
+		device.subsystem = video4linux
+		device.vendor.id = 2c7f
+		device.vendor.name = D-Vitec
+		device.product.id = 4a60
+		device.product.name = "USB2.0_CAM1:\ USB2.0_CAM1"
+		device.serial = D-Vitec_USB2.0_CAM1_0000
+		device.capabilities = :capture:
+		device.api = v4l2
+		device.path = /dev/video0
+		v4l2.device.driver = uvcvideo
+		v4l2.device.card = "USB2.0_CAM1:\ USB2.0_CAM1"
+		v4l2.device.bus_info = usb-0000:00:15.0-2.2
+		v4l2.device.version = 328748 (0x0005042c)
+		v4l2.device.capabilities = 2225078273 (0x84a00001)
+		v4l2.device.device_caps = 69206017 (0x04200001)
+	gst-launch-1.0 v4l2src ! ...
+
+
+Device found:
+
+	name  : USB2.0_CAM2: USB2.0_CAM2
+	class : Video/Source
+	caps  : video/x-raw, format=(string)YUY2, width=(int)1920, height=(int)1080, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)5/1;
+	        video/x-raw, format=(string)YUY2, width=(int)1280, height=(int)1024, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)5/1;
+	        video/x-raw, format=(string)YUY2, width=(int)1280, height=(int)720, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)1024, height=(int)768, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)800, height=(int)600, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)352, height=(int)288, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)320, height=(int)240, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)160, height=(int)120, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1920, height=(int)1080, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1280, height=(int)1024, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1280, height=(int)720, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)1024, height=(int)768, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)800, height=(int)600, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)352, height=(int)288, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)320, height=(int)240, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	        image/jpeg, width=(int)160, height=(int)120, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 25/1, 20/1, 15/1, 10/1, 5/1 };
+	properties:
+		udev-probed = true
+		device.bus_path = pci-0000:00:15.0-usb-0:2.4:1.0
+		sysfs.path = /sys/devices/pci0000:00/0000:00:15.0/usb1/1-2/1-2.4/1-2.4:1.0/video4linux/video4
+		device.bus = usb
+		device.subsystem = video4linux
+		device.vendor.id = 2c7f
+		device.vendor.name = D-vitec
+		device.product.id = 4a51
+		device.product.name = "USB2.0_CAM2:\ USB2.0_CAM2"
+		device.serial = D-vitec_USB2.0_CAM2_0000
+		device.capabilities = :capture:
+		device.api = v4l2
+		device.path = /dev/video4
+		v4l2.device.driver = uvcvideo
+		v4l2.device.card = "USB2.0_CAM2:\ USB2.0_CAM2"
+		v4l2.device.bus_info = usb-0000:00:15.0-2.4
+		v4l2.device.version = 328748 (0x0005042c)
+		v4l2.device.capabilities = 2225078273 (0x84a00001)
+		v4l2.device.device_caps = 69206017 (0x04200001)
+	gst-launch-1.0 v4l2src device=/dev/video4 ! ...
+
+
+Device found:
+
+	name  : USB2.0 UVC PC Camera: USB2.0 UV
+	class : Video/Source
+	caps  : video/x-raw, format=(string)YUY2, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 30/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)640, height=(int)480, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction){ 30/1, 30/1 };
+	        video/x-raw, format=(string)YUY2, width=(int)352, height=(int)288, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)30/1;
+	        video/x-raw, format=(string)YUY2, width=(int)320, height=(int)240, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)30/1;
+	        video/x-raw, format=(string)YUY2, width=(int)176, height=(int)144, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)30/1;
+	        video/x-raw, format=(string)YUY2, width=(int)160, height=(int)120, pixel-aspect-ratio=(fraction)1/1, framerate=(fraction)30/1;
+	properties:
+		udev-probed = true
+		device.bus_path = pci-0000:00:15.0-usb-0:8:1.0
+		sysfs.path = /sys/devices/pci0000:00/0000:00:15.0/usb1/1-8/1-8:1.0/video4linux/video2
+		device.bus = usb
+		device.subsystem = video4linux
+		device.vendor.id = 05e3
+		device.vendor.name = "GenesysLogic\\x20Technology\\x20Co.\\x2c\\x20Ltd."
+		device.product.id = 0510
+		device.product.name = "USB2.0\ UVC\ PC\ Camera:\ USB2.0\ UV"
+		device.serial = GenesysLogic_Technology_Co.__Ltd._USB2.0_UVC_PC_Camera
+		device.capabilities = :capture:
+		device.api = v4l2
+		device.path = /dev/video2
+		v4l2.device.driver = uvcvideo
+		v4l2.device.card = "USB2.0\ UVC\ PC\ Camera:\ USB2.0\ UV"
+		v4l2.device.bus_info = usb-0000:00:15.0-8
+		v4l2.device.version = 328748 (0x0005042c)
+		v4l2.device.capabilities = 2225078273 (0x84a00001)
+		v4l2.device.device_caps = 69206017 (0x04200001)
+	gst-launch-1.0 v4l2src device=/dev/video2 ! ...
+

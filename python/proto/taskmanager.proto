@@ -1,0 +1,2109 @@
+syntax = "proto3";
+
+package dop_taskmanager;
+// 不要修改此文件
+
+service TaskManager {
+    // 数据源信息列表
+    rpc DataSourceInfoList(DataSourceInfoListReq) returns (DataSourceInfoListResp){}
+
+    // 数据源表信息列表
+    rpc DataSourceTableList(DataSourceTableListReq) returns (DataSourceTableListResp){}
+
+    // 已授权表列表
+    rpc AccreditTableList(AccreditTableListReq) returns (AccreditTableListResp){}
+
+    // 申请数据源表请求
+    rpc ApplyTable(ApplyTableReq) returns (ApplyTableResp){}
+
+    // 数据源表申请结果
+    rpc UpdateApplyTable(UpdateApplyTableReq) returns (UpdateApplyTableResp){}
+
+    // 用户数据源表申请历史列表
+    rpc QueryApplyTableList(QueryApplyTableListReq) returns (QueryApplyTableListResp){}
+
+    // 查询用户的结果列表-用户ID
+    rpc QueryResultList(QueryResultListReq) returns (QueryResultListResp){}
+
+    // 删除结果表
+    rpc DeleteResult(DeleteResultReq) returns (DeleteResultResp){}
+
+    // 结果数据申请
+    rpc ApplyResultData(ApplyResultDataReq) returns (ApplyResultDataResp){}
+
+    // 结果数据申请审核结果
+    rpc ResultDataAuditResult(ResultDataAuditResultReq) returns (ResultDataAuditResultResp){}
+
+    // 结果数据申请审核结果
+    rpc UpdateApplyResultData(UpdateApplyResultDataReq) returns (UpdateApplyResultDataResp){}
+
+    // 用户查询结果数据申请历史列表
+    rpc QueryApplyResultList(QueryApplyResultListReq) returns (QueryApplyResultListResp){}
+
+    // 同步表信息及策略
+    rpc SyncDataSourceTable(SyncDataSourceTableReq) returns (SyncDataSourceTableResp){}
+
+    // 同步表数据
+    rpc SyncActualData(SyncActualDataReq) returns (SyncActualDataResp){}
+
+    // 同步表策略(暂时不需要了)
+    rpc SyncDataSourceTableSample(SyncDataSourceTableSampleReq) returns (SyncDataSourceTableSampleResp){}
+
+    // 同步用户资源信息
+    rpc SyncUserSandboxInfo(SyncUserSandboxInfoReq) returns (SyncUserSandboxInfoResp){}
+
+    // 结果文件列表, 查询某个算法或者某个任务的结果信息
+    rpc ResultFileList(ResultFileListReq) returns (ResultFileListResp){}
+
+    // 资源申请
+    rpc SandboxBaseApply(SandboxBaseApplyReq) returns (SandboxBaseApplyResp){}
+
+    // 资源申请
+    rpc SandboxApply(SandboxApplyReq) returns (SandboxApplyResp){}
+
+    // 资源列表查询
+    rpc SandboxListQuery(SandboxListQueryReq) returns (SandboxListQueryResp){}
+
+    // 查询资源分配状态列表
+    rpc SandboxApplyResultList(SandboxApplyResultListReq) returns (SandboxApplyResultListResp){}
+
+    // 资源操作
+    rpc SandboxOperation(SandboxOperationReq) returns (SandboxOperationResp){}
+
+    // 任务状态变更通知
+    rpc UpdateTaskResult(UpdateTaskResultReq) returns (UpdateTaskResultResp){}
+
+    // 自有数据上传
+    rpc CreateUserTable(CreateUserTableReq) returns (CreateUserTableResp){}
+
+    // 查询自有表列表
+    rpc QueryUserTableList(QueryUserTableListReq) returns (QueryUserTableListResp){}
+
+    // 查询自有表信息详情
+    rpc QueryUserTableDetail(QueryUserTableDetailReq) returns (QueryUserTableDetailResp){}
+
+    // 查询结果URL
+    rpc QueryResultURL(QueryResultURLReq) returns (QueryResultURLResp){}
+
+    // 创建结果在线接口--在线浏览或下载
+    rpc CreateResultOnline(CreateResultOnlineReq) returns (CreateResultOnlineResp){}
+
+    // 创建结果匹配接口生成
+    rpc CreateResultMatch(CreateResultMatchReq) returns (CreateResultMatchResp){}
+
+    // 收集算法模型运行过程中的日志
+    rpc CollectLog(CollectLogReq) returns (CollectLogResp){}
+
+    // 数据清单列表查询
+    rpc QueryOpenList(QueryOpenListReq) returns (QueryOpenListResp){}
+
+    // 数据开放清单详情查询
+    rpc QueryOpenListDetail(QueryOpenListDetailReq) returns (QueryOpenListDetailResp){}
+
+    // 用户操作收藏数据清单 增加或取消
+    rpc OperateOpenList(OperateOpenListReq) returns (OperateOpenListResp){}
+
+    // 查询用户收藏数据清单
+    rpc QueryUserStaredOpenList(QueryUserStaredOpenListReq) returns (QueryUserStaredOpenListResp){}
+
+    // 申请开放清单
+    rpc ApplyOpenlist(ApplyOpenlistReq) returns (ApplyOpenlistResp){}
+
+    // 查询清单申请列表（也支持单条查询）
+    rpc QueryApplyOpenlist(QueryApplyOpenlistReq) returns (QueryApplyOpenlistResp){}
+
+    // 已授权表列表-sd专用
+    rpc SdAccreditTableList(SdAccreditTableListReq) returns (SdAccreditTableListResp){}
+
+    // 用户查询结果数据申请历史列表-sd专用
+    rpc SdQueryApplyResultList(SdQueryApplyResultListReq) returns (SdQueryApplyResultListResp){}
+
+    // 用户查询预览信息-sd专用
+    rpc SdQueryReviewInfo(SdQueryReviewInfoReq) returns (SdQueryReviewInfoResp){}
+
+    // 用户查询预览信息-sd专用shulff)
+    rpc SdQueryShulffInfo(SdQueryShulffInfoReq) returns (SdQueryShulffInfoResp){}
+
+}
+
+message SdQueryReviewInfoReq {
+    string result_id = 1;
+}
+
+message SdQueryReviewInfoResp {
+    string file = 1;
+
+    int32 is_empty = 2;
+    // 返回码
+    int32 code  = 3;
+
+    // 返回信息
+    string msg  = 4;
+}
+
+message SdQueryShulffInfoReq {
+    string result_id = 1;
+}
+
+message SdQueryShulffInfoResp {
+    string file = 1;
+
+    int32 is_empty = 2;
+    // 返回码
+    int32 code  = 3;
+
+    // 返回信息
+    string msg  = 4;
+}
+
+
+// dataSourceInfoListReq
+message DataSourceInfoListReq {
+    
+}
+
+// 数据源信息列表
+message DataSourceInfo {
+    
+
+    // 数据源ID
+    string data_source_id  = 1;
+
+    // 数据源名称
+    string name  = 2;
+
+    // 数据源类型:0->DatabaseTypeUnknown,1->Mysql,2->Oracle,3->Hive,4->DB2
+    DatabaseType type  = 3;
+
+    // 覆盖地域
+    string coverage  = 4;
+
+    // 数量级
+    string data_level  = 5;
+}
+
+// dataSourceInfoListResp
+message DataSourceInfoListResp {
+    
+
+    // 数据源信息列表
+    repeated DataSourceInfo data_source_info_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// dataSourceInfoListUrlParam
+message DataSourceInfoListUrlParam {
+    
+}
+
+// dataSourceTableListReq
+message DataSourceTableListReq {
+    
+
+    // 数据源ID
+    string data_source_id  = 1;
+
+    // 数据表ID
+    string table_id  = 2;
+}
+
+// 字段列表
+message Field {
+    
+
+    // 字段名
+    string name  = 1;
+
+    // 字段类型
+    string type  = 2;
+
+    // 是否脱敏
+    bool is_desensitization  = 3;
+
+    // 字段描述
+    string description  = 4;
+
+    // 字段别名
+    string alias_name  = 5;
+}
+
+// 数据表列表
+message TableInfo {
+    
+
+    // 数据表ID
+    string table_id  = 1;
+
+    // 数据源ID
+    string data_source_id  = 2;
+
+    // 表名
+    string table_name  = 3;
+
+    // 表别名
+    string alias_name  = 4;
+
+    // 覆盖区域
+    string coverage  = 5;
+
+    // data_level
+    string data_level  = 6;
+
+    // 字段列表
+    repeated Field field_list  = 7;
+
+    // 发布ID
+    string release_id  = 8;
+
+    // 描述信息
+    string description  = 9;
+
+    // 用户信息
+    string user_info  = 10;
+
+    // 数据总量大小
+    string data_size  = 11;
+}
+
+// dataSourceTableListResp
+message DataSourceTableListResp {
+    
+
+    // 数据表列表
+    repeated TableInfo table_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// dataSourceTableListUrlParam
+message DataSourceTableListUrlParam {
+    
+}
+
+// accreditTableListReq
+message AccreditTableListReq {
+    
+}
+
+// table_list
+message AccreditTableInfo {
+
+    // table
+    TableInfo table  = 1;
+
+    // begin_time
+    int64 begin_time  = 2;
+
+    // end_time
+    int64 end_time  = 3;
+
+    int64 duration = 4;
+
+    int32 expired = 5;
+
+    int64 update_time = 6;
+}
+
+// accreditTableListResp
+message AccreditTableListResp {
+    
+
+    // table_list
+    repeated AccreditTableInfo table_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// accreditTableListUrlParam
+message AccreditTableListUrlParam {
+    
+}
+
+// sdAccreditTableListReq
+message SdAccreditTableListReq {
+    
+}
+
+// sdAccreditTableListResp
+message SdAccreditTableListResp {
+    
+
+    // table_list
+    repeated AccreditTableInfo table_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sdAccreditTableListUrlParam
+message SdAccreditTableListUrlParam {
+    
+}
+
+// applyTableReq
+message ApplyTableReq {
+    
+
+    // 用户名称
+    string user_name  = 1;
+
+    // 数据源ID
+    string data_source_id  = 2;
+
+    // 数据表ID
+    string table_id  = 3;
+
+    // 数据使用场景
+    string data_scene  = 4;
+
+    // 数据使用方式
+    string data_use  = 5;
+
+    // 用户授权凭证的ID
+    string author_certificate_id  = 6;
+
+    // 申请原因
+    string apply_reason  = 7;
+
+    // begin_time
+    int64 begin_time  = 8;
+
+    // end_time
+    int64 end_time  = 9;
+}
+
+// applyTableResp
+message ApplyTableResp {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// applyTableUrlParam
+message ApplyTableUrlParam {
+    
+}
+
+// updateApplyTableReq
+message UpdateApplyTableReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // is_approved
+    bool is_approved  = 2;
+
+    // refuse_reason
+    string refuse_reason  = 3;
+
+    // begin_time
+    int64 begin_time  = 4;
+
+    // end_time
+    int64 end_time  = 5;
+}
+
+// updateApplyTableResp
+message UpdateApplyTableResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// updateApplyTableUrlParam
+message UpdateApplyTableUrlParam {
+    
+}
+
+// queryApplyTableListReq
+message QueryApplyTableListReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+}
+
+// apply_list
+message ApplyTableInfo {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 数据表ID
+    string table_id  = 2;
+
+    // 数据表名称
+    string table_name  = 3;
+
+    // 用户ID
+    string user_id  = 4;
+
+    // 用户名称
+    string user_name  = 5;
+
+    // begin_time
+    int64 begin_time  = 6;
+
+    // end_time
+    int64 end_time  = 7;
+
+    // apply_reason
+    string apply_reason  = 8;
+
+    // audit_result
+    int32 audit_result  = 9;
+
+    // refuse_reason
+    string refuse_reason  = 10;
+}
+
+// queryApplyTableListResp
+message QueryApplyTableListResp {
+    
+
+    // apply_list
+    repeated ApplyTableInfo apply_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryApplyTableListUrlParam
+message QueryApplyTableListUrlParam {
+    
+}
+
+// queryResultListReq
+message QueryResultListReq {
+    
+}
+
+// 结果应用场景
+message ResultApplication {
+    
+
+    // 应用场景:0->DataUseTypeUnknown,1->Download,2->Api,3->OnlineView
+    DataUseType use_type  = 1;
+
+    // 基础URL
+    string base_url  = 2;
+
+    // 具体URL
+    string url  = 3;
+}
+
+// result_list
+message ResultInfo {
+    
+
+    // 结果ID
+    string result_id  = 1;
+
+    // 模型ID
+    string model_id  = 2;
+
+    // 申请ID
+    string apply_id  = 3;
+
+    // 算法名称
+    string model_name  = 4;
+
+    // 任务ID
+    string task_id  = 5;
+
+    // 结果应用场景
+    repeated ResultApplication result_application  = 6;
+
+    // 数据量 数据行数
+    int32 row_count  = 7;
+
+    // 审核状态
+    int32 result_status  = 8;
+
+    // 生成时间
+    int64 create_time  = 9;
+}
+
+// queryResultListResp
+message QueryResultListResp {
+    
+
+    // result_list
+    repeated ResultInfo result_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryResultListUrlParam
+message QueryResultListUrlParam {
+    
+}
+
+// deleteResultReq
+message DeleteResultReq {
+    
+
+    // 结果ID
+    string result_id  = 1;
+}
+
+// deleteResultResp
+message DeleteResultResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// deleteResultUrlParam
+message DeleteResultUrlParam {
+    
+}
+
+// applyResultDataReq
+message ApplyResultDataReq {
+    
+
+    // 结果ID
+    string result_id  = 1;
+
+    // 数据使用场景
+    string data_scene  = 2;
+
+    // 授权开始时间
+    int64 begin_time  = 3;
+
+    // 授权结束时间
+    int64 end_time  = 4;
+
+    // 数据使用方式:0->DataUseTypeUnknown,1->Download,2->Api,3->OnlineView
+    repeated DataUseType use  = 5;
+
+    // apply_reason
+    string apply_reason  = 6;
+}
+
+// applyResultDataResp
+message ApplyResultDataResp {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// applyResultDataUrlParam
+message ApplyResultDataUrlParam {
+    
+}
+
+// resultDataAuditResultReq
+message ResultDataAuditResultReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 是否通过
+    bool is_approved  = 2;
+
+    // 不通过的原因
+    string refuse_reason  = 3;
+}
+
+// resultDataAuditResultResp
+message ResultDataAuditResultResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// resultDataAuditResultUrlParam
+message ResultDataAuditResultUrlParam {
+    
+}
+
+// updateApplyResultDataReq
+message UpdateApplyResultDataReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // is_approved
+    bool is_approved  = 2;
+
+    // refuse_reason
+    string refuse_reason  = 3;
+
+    // 数据使用方式:0->DataUseTypeUnknown,1->Download,2->Api,3->OnlineView
+    repeated DataUseType use  = 4;
+
+    // 结果费用
+    int32 result_cost  = 5;
+
+    // 折扣率整数
+    int32 discount_rate  = 6;
+}
+
+// updateApplyResultDataResp
+message UpdateApplyResultDataResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// updateApplyResultDataUrlParam
+message UpdateApplyResultDataUrlParam {
+    
+}
+
+// queryApplyResultListReq
+message QueryApplyResultListReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+}
+
+// apply_list
+message ApplyResultInfo {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // result_id
+    string result_id  = 2;
+
+    // 结果应用场景
+    repeated ResultApplication result_application  = 3;
+
+    // 审核结果
+    int32 audit_result  = 4;
+
+    // 审核拒绝原因
+    string refuse_reason  = 5;
+
+    // 申请理由
+    string apply_reason  = 6;
+}
+
+// apply_list
+message SdApplyResultInfo {
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // result_id
+    string result_id  = 2;
+
+    // 结果应用场景
+    //repeated ResultApplication result_application  = 3;
+
+    // 审核结果
+    int32 audit_result  = 3;
+
+    // 审核拒绝原因
+    string refuse_reason  = 4;
+
+    // 申请理由
+    string apply_reason  = 5;
+
+    // 结果原因
+    ResultInfo result_info  = 6;
+
+    // 申请时间
+    int64 apply_time  = 7;
+
+    // 用户信息
+    string user_info  = 8;
+
+    // 审核用户信息
+    string check_user_info = 9;
+
+    // 授权更新时间
+    int64 update_time  = 10;
+}
+
+// queryApplyResultListResp
+message QueryApplyResultListResp {
+    
+
+    // apply_list
+    ApplyResultInfo apply_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryApplyResultListUrlParam
+message QueryApplyResultListUrlParam {
+    
+}
+
+// sdQueryApplyResultListReq
+message SdQueryApplyResultListReq {
+    
+}
+
+// sdQueryApplyResultListResp
+message SdQueryApplyResultListResp {
+    
+
+    // apply_list
+    repeated SdApplyResultInfo apply_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sdQueryApplyResultListUrlParam
+message SdQueryApplyResultListUrlParam {
+    
+}
+
+// rule_list
+message RuleInfo {
+    
+
+    // rule_id
+    string rule_id  = 1;
+
+    // field_id
+    string field_id  = 2;
+
+    // field_name
+    string field_name  = 3;
+
+    // rule_type
+    string rule_type  = 4;
+
+    // field_controller
+    string field_controller  = 5;
+}
+
+// 策略列表
+message StrategyInfo {
+    
+
+    // policy_id
+    string policy_id  = 1;
+
+    // policy_name
+    string policy_name  = 2;
+
+    // role_id
+    string role_id  = 3;
+
+    // rule_list
+    repeated RuleInfo rule_list  = 4;
+}
+
+// syncDataSourceTableReq
+message SyncDataSourceTableReq {
+    
+
+    // table
+    TableInfo table  = 1;
+
+    // 策略列表
+    repeated StrategyInfo strategy_list  = 2;
+}
+
+// syncDataSourceTableResp
+message SyncDataSourceTableResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// syncDataSourceTableUrlParam
+message SyncDataSourceTableUrlParam {
+    
+}
+
+// syncActualDataReq
+message SyncActualDataReq {
+    
+
+    // sftp_path
+    string sftp_path  = 1;
+
+    // release_id
+    string release_id  = 2;
+
+    // 数据表ID
+    string table_id  = 3;
+
+    // 数据表名称
+    string table_name  = 4;
+
+    // :0->SyncTypeUnknown,1->Append,2->Override
+    SyncType sync_type  = 5;
+
+    // :0->EncroptTypeUnknown,1->Plain,2->Des,3->TripleDes,4->Aes
+    EncroptType encrypt_type  = 6;
+
+    // 字段列表
+    repeated Field field_list  = 7;
+}
+
+// syncActualDataResp
+message SyncActualDataResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// syncActualDataUrlParam
+message SyncActualDataUrlParam {
+    
+}
+
+// syncDataSourceTableSampleReq
+message SyncDataSourceTableSampleReq {
+    
+
+    // 数据源ID
+    string data_source_id  = 1;
+
+    // 数据表ID
+    string table_id  = 2;
+
+    // data
+    string data  = 3;
+}
+
+// syncDataSourceTableSampleResp
+message SyncDataSourceTableSampleResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// syncDataSourceTableSampleUrlParam
+message SyncDataSourceTableSampleUrlParam {
+    
+}
+
+// user
+message UserInfo {
+    
+
+    // 用户名称
+    string user_name  = 1;
+
+    // sftp_ip
+    string sftp_ip  = 2;
+
+    // sftp_user
+    string sftp_user  = 3;
+
+    // sftp_passwd
+    string sftp_passwd  = 4;
+
+    // sandbox_ip
+    string sandbox_ip  = 5;
+
+    // sandbox_sftp_user
+    string sandbox_sftp_user  = 6;
+
+    // sandbox_sftp_passwd
+    string sandbox_sftp_passwd  = 7;
+
+    // :0->SandboxStatusUnknown,1->Enable,2->Disable
+    SandboxStatus sandbox_status  = 8;
+}
+
+// syncUserSandboxInfoReq
+message SyncUserSandboxInfoReq {
+    
+
+    // user
+    UserInfo user  = 1;
+}
+
+// syncUserSandboxInfoResp
+message SyncUserSandboxInfoResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// syncUserSandboxInfoUrlParam
+message SyncUserSandboxInfoUrlParam {
+    
+}
+
+// resultFileListReq
+message ResultFileListReq {
+    
+
+    // 模型ID
+    string model_id  = 1;
+
+    // 任务ID
+    string task_id  = 2;
+}
+
+// result_file_list
+message ResultFileInfo {
+    
+
+    // 模型ID
+    string model_id  = 1;
+
+    // 任务ID
+    string task_id  = 2;
+
+    // 结果文件名
+    string result_filename  = 3;
+
+    // 生成时间
+    int32 create_time  = 4;
+
+    // 数据规模
+    int64 data_size  = 5;
+}
+
+// resultFileListResp
+message ResultFileListResp {
+    
+
+    // result_file_list
+    repeated ResultFileInfo result_file_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// resultFileListUrlParam
+message ResultFileListUrlParam {
+    
+}
+
+// 资源配置
+message SandboxConfig {
+    
+
+    // 操作系统:0->SandboxOSTypeUnknown,1->Centos6,2->Centos7,3->Redhat6,4->Redhat7,5->Ubuntu1604,6->Ubuntu1810
+    SandboxOSType os_type  = 1;
+
+    // 系统盘(单位:G)
+    int32 disk_os_size  = 2;
+
+    // 数据盘大小(单位:G)
+    int32 disk_data_size  = 3;
+
+    // CPU核数
+    int32 cpu_core  = 4;
+
+    // 内存大小(单位:G)
+    int32 memory_size  = 5;
+}
+
+// sandboxBaseApplyReq
+message SandboxBaseApplyReq {
+    
+
+    // 申请理由
+    string apply_reason  = 1;
+
+    // 申请场景
+    string apply_scene  = 2;
+
+    // 资源类型:0->SandboxTypeUnknown,1->Share,2->Exclusive
+    SandboxType type  = 3;
+
+    // 项目ID
+    string project_id  = 4;
+
+    // 申请使用时长(单位:秒)
+    int32 apply_duration  = 5;
+
+    // 资源配置
+    SandboxConfig sandbox_config  = 6;
+}
+
+// sandboxBaseApplyResp
+message SandboxBaseApplyResp {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sandboxBaseApplyUrlParam
+message SandboxBaseApplyUrlParam {
+    
+}
+
+// 基础配置
+message Resource {
+    
+
+    // 数据规模
+    int32 data_size  = 1;
+
+    // 数据单位:0->DataUnitUnknown,1->KB,2->MB,3->GB,4->TB,5->PB
+    DataUnit data_unit  = 2;
+
+    // 申请使用时长(单位:秒)
+    int32 apply_duration  = 3;
+
+    // 算法复杂度:0->ModelComplexityUnknown,1->Easy,2->Middle,3->Hard
+    ModelComplexity model_complexity  = 4;
+}
+
+// 沙箱配置
+message Config {
+    
+
+    // 基础配置
+    Resource resource  = 1;
+}
+
+// sandboxApplyReq
+message SandboxApplyReq {
+    
+
+    // 申请理由
+    string apply_reason  = 1;
+
+    // 申请场景
+    string apply_scene  = 2;
+
+    // 资源类型:0->SandboxTypeUnknown,1->Share,2->Exclusive
+    SandboxType type  = 3;
+
+    // 沙箱配置
+    Config config  = 4;
+}
+
+// sandboxApplyResp
+message SandboxApplyResp {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sandboxApplyUrlParam
+message SandboxApplyUrlParam {
+    
+}
+
+// sandboxListQueryReq
+message SandboxListQueryReq {
+    
+
+    // 资源ID
+    string sandbox_id  = 1;
+}
+
+// 资源列表
+message SandboxInfo {
+    
+
+    // 申请理由
+    string apply_reason  = 1;
+
+    // 申请场景
+    string apply_scene  = 2;
+
+    // 资源类型:0->SandboxTypeUnknown,1->Share,2->Exclusive
+    SandboxType type  = 3;
+
+    // 项目ID
+    string project_id  = 4;
+
+    // 申请使用时长(单位:秒)
+    int32 apply_duration  = 5;
+
+    // 消息箱配置
+    SandboxConfig sandbox_config  = 6;
+
+    // 资源创建时间
+    int64 create_time  = 7;
+}
+
+// sandboxListQueryResp
+message SandboxListQueryResp {
+    
+
+    // 资源列表
+    repeated SandboxInfo sandbox_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sandboxListQueryUrlParam
+message SandboxListQueryUrlParam {
+    
+}
+
+// sandboxApplyResultListReq
+message SandboxApplyResultListReq {
+    
+
+    // 申请ID(不传则返回用户所有的申请记录)
+    string apply_id  = 1;
+}
+
+// sandbox_apply_result_list
+message SandboxApplyResult {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+
+    // is_success
+    bool is_success  = 2;
+
+    // 失败原因
+    string fail_reason  = 3;
+
+    // 资源ID
+    string sandbox_id  = 4;
+
+    // 资源IP
+    string sandbox_ip  = 5;
+}
+
+// sandboxApplyResultListResp
+message SandboxApplyResultListResp {
+    
+
+    // sandbox_apply_result_list
+    repeated SandboxApplyResult sandbox_apply_result_list  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// sandboxApplyResultListUrlParam
+message SandboxApplyResultListUrlParam {
+    
+}
+
+// sandboxOperationReq
+message SandboxOperationReq {
+    
+
+    // sandbox_id
+    string sandbox_id  = 1;
+
+    // 操作(删除，关闭...):0->SandboxOperationTypeUnknown,1->Open,2->Close,3->Delete,4->Reopen
+    SandboxOperationType operation  = 2;
+}
+
+// sandboxOperationResp
+message SandboxOperationResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// sandboxOperationUrlParam
+message SandboxOperationUrlParam {
+    
+}
+
+// updateTaskResultReq
+message UpdateTaskResultReq {
+    
+
+    // task_id
+    string task_id  = 1;
+
+    // 任务状态:0->TaskStatusUnknown,1->Submitted,2->Running,3->RunningSuccess,4->RunningFail,5->AuditAuditing,6->AuditApproved,7->AuditRefused,8->ResultAuditing,9->ResultAuditApproved,10->ResultAuditRefused,11->Deleted
+    TaskStatus task_status  = 2;
+
+    // 如果失败，则写入失败原因
+    string fail_reason  = 3;
+
+    // 结果ID
+    string result_id  = 4;
+
+    // 结果文件
+    string result_filename  = 5;
+
+    // 任务执行时长(单位:秒)
+    int32 exec_duration  = 6;
+}
+
+// updateTaskResultResp
+message UpdateTaskResultResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// updateTaskResultUrlParam
+message UpdateTaskResultUrlParam {
+    
+}
+
+// 字段信息
+message OwnField {
+    
+
+    // 字段名
+    string fieldName  = 1;
+
+    // 字段类型
+    string fieldType  = 2;
+
+    // 字段描述
+    string fieldDesc  = 3;
+}
+
+// createUserTableReq
+message CreateUserTableReq {
+    
+
+    // 数据表名称
+    string table_name_cn  = 1;
+
+    // 数据描述
+    string table_desc  = 2;
+
+    // 是否自动创建表
+    bool auto_import  = 3;
+
+    // 自有表名称
+    string table_name  = 4;
+
+    // 文件ID
+    string file_id  = 5;
+
+    // 首行是否为列名
+    bool file_header  = 6;
+
+    // 分隔符
+    string file_delimiter  = 7;
+
+    // 字段信息
+    repeated OwnField fields  = 8;
+}
+
+// createUserTableResp
+message CreateUserTableResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// createUserTableUrlParam
+message CreateUserTableUrlParam {
+    
+}
+
+// queryUserTableListReq
+message QueryUserTableListReq {
+    
+}
+
+// TableList
+message OwnTable {
+    
+
+    // 文件ID
+    string file_id  = 1;
+
+    // 数据服务名称
+    string table_name_cn  = 2;
+
+    // 文件名称
+    string file_name  = 3;
+
+    // 创建时间,unix时间戳
+    int32 create_time  = 4;
+
+    // 首行是否为列名
+    bool file_header  = 5;
+
+    // 上传状态
+    string status  = 6;
+}
+
+// queryUserTableListResp
+message QueryUserTableListResp {
+    
+
+    // TableList
+    repeated OwnTable TableList  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryUserTableListUrlParam
+message QueryUserTableListUrlParam {
+    
+}
+
+// queryUserTableDetailReq
+message QueryUserTableDetailReq {
+    
+
+    // file_id
+    string file_id  = 1;
+}
+
+// queryUserTableDetailResp
+message QueryUserTableDetailResp {
+    
+
+    // 文件ID
+    string file_id  = 1;
+
+    // 数据服务名称
+    string table_name_cn  = 2;
+
+    // 数据描述
+    string table_desc  = 3;
+
+    // 是否自动创建表
+    bool auto_import  = 4;
+
+    // 自有表名称
+    string table_name  = 5;
+
+    // 首行是否为列名
+    bool file_header  = 6;
+
+    // 分隔符
+    string file_delimiter  = 7;
+
+    // 字段信息
+    repeated OwnField fields  = 8;
+
+    // 返回码
+    int32 code  = 9;
+
+    // 返回信息
+    string msg  = 10;
+}
+
+// queryUserTableDetailUrlParam
+message QueryUserTableDetailUrlParam {
+    
+}
+
+// queryResultURLReq
+message QueryResultURLReq {
+    
+
+    // 结果ID
+    string result_id  = 1;
+}
+
+// queryResultURLResp
+message QueryResultURLResp {
+    
+
+    // 基础URL
+    string base_url  = 1;
+
+    // 具体URL
+    string url  = 2;
+
+    // 请求参数
+    repeated string apply_param  = 3;
+
+    // 返回参数
+    repeated string response_param  = 4;
+
+    // 返回码
+    int32 code  = 5;
+
+    // 返回信息
+    string msg  = 6;
+}
+
+// queryResultURLUrlParam
+message QueryResultURLUrlParam {
+    
+}
+
+// createResultOnlineReq
+message CreateResultOnlineReq {
+    
+
+    // 结果ID
+    string result_id  = 1;
+
+    // 是否为在线下载 true-下载 false-浏览
+    bool url_download  = 2;
+}
+
+// createResultOnlineResp
+message CreateResultOnlineResp {
+    
+
+    // 基础URL
+    string base_url  = 1;
+
+    // 具体URL
+    string url  = 2;
+
+    // 返回码
+    int32 code  = 3;
+
+    // 返回信息
+    string msg  = 4;
+}
+
+// createResultOnlineUrlParam
+message CreateResultOnlineUrlParam {
+    
+}
+
+// createResultMatchReq
+message CreateResultMatchReq {
+    
+
+    // 结果ID
+    string result_id  = 1;
+
+    // 请求参数
+    repeated string apply_param  = 2;
+
+    // 返回参数
+    repeated string response_param  = 3;
+}
+
+// createResultMatchResp
+message CreateResultMatchResp {
+    
+
+    // 基础URL
+    string base_url  = 1;
+
+    // 具体URL
+    string url  = 2;
+
+    // 返回码
+    int32 code  = 3;
+
+    // 返回信息
+    string msg  = 4;
+}
+
+// createResultMatchUrlParam
+message CreateResultMatchUrlParam {
+    
+}
+
+// 日志信息
+message RunningLog {
+    
+
+    // id
+    int32 id  = 1;
+
+    // info
+    string info  = 2;
+}
+
+// collectLogReq
+message CollectLogReq {
+    
+
+    // task_id
+    string task_id  = 1;
+
+    // 日志信息
+    repeated RunningLog logs  = 2;
+
+    // 是否同步全部日志
+    bool is_end  = 3;
+}
+
+// collectLogResp
+message CollectLogResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// collectLogUrlParam
+message CollectLogUrlParam {
+    
+}
+
+// queryOpenListReq
+message QueryOpenListReq {
+    
+}
+
+// 数据量级
+message DataMagnitude {
+    
+
+    // 值
+    int32 value  = 1;
+
+    // 单位
+    string units  = 2;
+}
+
+// 开放清单信息
+message OpenList {
+    
+
+    // 开放清单ID
+    string open_list_id  = 1;
+
+    // 开放清单名称
+    string open_list_name  = 2;
+
+    // 数据提供单位名称
+    string create_org_name  = 3;
+
+    // 所属领域
+    repeated string province  = 4;
+
+    // 访问次数
+    int32 visits  = 5;
+
+    // 申请次数
+    int32 apply_times  = 6;
+
+    // 数据量级
+    DataMagnitude data_magnitude  = 7;
+}
+
+// queryOpenListResp
+message QueryOpenListResp {
+    
+
+    // 开放清单信息
+    repeated OpenList open_info  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryOpenListUrlParam
+message QueryOpenListUrlParam {
+    
+}
+
+// queryOpenListDetailReq
+message QueryOpenListDetailReq {
+    
+
+    // 开放清单ID
+    string open_list_id  = 1;
+}
+
+// fields
+message Fields {
+    
+
+    // 字段名称
+    string name  = 1;
+
+    // 字段类型
+    string type  = 2;
+
+    // 字段描述
+    string desc  = 3;
+}
+
+// queryOpenListDetailResp
+message QueryOpenListDetailResp {
+    
+
+    // 开放清单ID
+    string open_list_id  = 1;
+
+    // 开放清单名称
+    string open_list_name  = 2;
+
+    // 数据提供单位名称
+    string create_org_name  = 3;
+
+    // 所属领域
+    string province  = 4;
+
+    // 访问次数
+    int32 visits  = 5;
+
+    // 申请次数
+    int32 apply_times  = 6;
+
+    // 数据量级
+    DataMagnitude data_magnitude  = 7;
+
+    // 更新日期
+    int32 update_time  = 8;
+
+    // fields
+    repeated Fields fields  = 9;
+
+    // 数据预览
+    string sample  = 10;
+
+    // 返回码
+    int32 code  = 11;
+
+    // 返回信息
+    string msg  = 12;
+}
+
+// queryOpenListDetailUrlParam
+message QueryOpenListDetailUrlParam {
+    
+}
+
+// operateOpenListReq
+message OperateOpenListReq {
+    
+
+    // 开放清单ID
+    string open_list_id  = 1;
+
+    // 是否收藏
+    bool star  = 2;
+}
+
+// operateOpenListResp
+message OperateOpenListResp {
+    
+
+    // 返回码
+    int32 code  = 1;
+
+    // 返回信息
+    string msg  = 2;
+}
+
+// operateOpenListUrlParam
+message OperateOpenListUrlParam {
+    
+}
+
+// queryUserStaredOpenListReq
+message QueryUserStaredOpenListReq {
+    
+
+    // 数据领域 非必传
+    string province  = 1;
+}
+
+// star
+message StarOpenList {
+    
+
+    // 开放清单ID
+    string open_list_id  = 1;
+}
+
+// queryUserStaredOpenListResp
+message QueryUserStaredOpenListResp {
+    
+
+    // star
+    repeated StarOpenList star  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryUserStaredOpenListUrlParam
+message QueryUserStaredOpenListUrlParam {
+    
+}
+
+// applyOpenlistReq
+message ApplyOpenlistReq {
+    
+
+    // user_name
+    string user_name  = 1;
+
+    // 开放清单ID
+    string open_list_id  = 2;
+
+    // 数据使用场景
+    string data_scene  = 3;
+
+    // 数据使用方式
+    string data_use  = 4;
+
+    // 用户授权凭证的ID
+    string author_certificate_id  = 5;
+
+    // 申请原因
+    string apply_reason  = 6;
+
+    // begin_time
+    int64 begin_time  = 7;
+
+    // end_time
+    int64 end_time  = 8;
+}
+
+// applyOpenlistResp
+message ApplyOpenlistResp {
+    
+
+    // apply_id
+    string apply_id  = 1;
+
+    // code
+    int32 code  = 2;
+
+    // msg
+    string msg  = 3;
+}
+
+// applyOpenlistUrlParam
+message ApplyOpenlistUrlParam {
+    
+}
+
+// queryApplyOpenlistReq
+message QueryApplyOpenlistReq {
+    
+
+    // 申请ID
+    string apply_id  = 1;
+}
+
+// table
+message OpenInfo {
+    
+
+    // user_name
+    string user_name  = 1;
+
+    // 开放清单ID
+    string open_list_id  = 2;
+
+    // 数据使用场景
+    string data_scene  = 3;
+
+    // 数据使用方式
+    string data_use  = 4;
+
+    // 用户授权凭证的ID
+    string author_certificate_id  = 5;
+
+    // 申请原因
+    string apply_reason  = 6;
+
+    // begin_time
+    int64 begin_time  = 7;
+
+    // end_time
+    int64 end_time  = 8;
+
+    // audit_result
+    int32 audit_result  = 9;
+
+    // refuse_reason
+    string refuse_reason  = 10;
+}
+
+// TableList
+message OpenListInfo {
+    
+
+    // table
+    OpenInfo table  = 1;
+}
+
+// queryApplyOpenlistResp
+message QueryApplyOpenlistResp {
+    
+
+    // TableList
+    repeated OpenListInfo TableList  = 1;
+
+    // 返回码
+    int32 code  = 2;
+
+    // 返回信息
+    string msg  = 3;
+}
+
+// queryApplyOpenlistUrlParam
+message QueryApplyOpenlistUrlParam {
+    
+}
+
+
+// 数据量级
+enum DataUnit {
+    
+    DataUnitUnknown = 0;
+    KB = 1;
+    MB = 2;
+    GB = 3;
+    TB = 4;
+    PB = 5;
+}
+
+// 算法复杂度
+enum ModelComplexity {
+    
+    ModelComplexityUnknown = 0;
+    Easy = 1;
+    Middle = 2;
+    Hard = 3;
+}
+
+// 加密类型
+enum EncroptType {
+    
+    EncroptTypeUnknown = 0;
+    Plain = 1;
+    Des = 2;
+    TripleDes = 3;
+    Aes = 4;
+}
+
+// 同步类型
+enum SyncType {
+    
+    SyncTypeUnknown = 0;
+    Append = 1;
+    Override = 2;
+}
+
+// 资源操作
+enum SandboxOperationType {
+    
+    SandboxOperationTypeUnknown = 0;
+    Open = 1;
+    Close = 2;
+    Delete = 3;
+    Reopen = 4;
+}
+
+// 资源类型
+enum SandboxType {
+    
+    SandboxTypeUnknown = 0;
+    Share = 1;
+    Exclusive = 2;
+}
+
+// 资源状态
+enum SandboxStatus {
+    
+    SandboxStatusUnknown = 0;
+    Enable = 1;
+    Disable = 2;
+}
+
+// 资源配置等级
+enum SandboxLevel {
+    
+    SandboxLevelUnknown = 0;
+    Level1 = 1;
+    Level2 = 2;
+    Level3 = 3;
+    Level4 = 4;
+    Level5 = 5;
+}
+
+// 操作系统类型
+enum SandboxOSType {
+    
+    SandboxOSTypeUnknown = 0;
+    Centos6 = 1;
+    Centos7 = 2;
+    Redhat6 = 3;
+    Redhat7 = 4;
+    Ubuntu1604 = 5;
+    Ubuntu1810 = 6;
+}
+
+// 登录类型
+enum LoginType {
+    
+    LoginTypeUnknown = 0;
+    Password = 1;
+    PublicKey = 2;
+}
+
+// 网络类型
+enum NetworkType {
+    
+    NetworkTypeUnknown = 0;
+    IntranetVpc = 1;
+}
+
+// 数据库类型
+enum DatabaseType {
+    
+    DatabaseTypeUnknown = 0;
+    Mysql = 1;
+    Oracle = 2;
+    Hive = 3;
+    DB2 = 4;
+}
+
+// 审核状态
+enum AuditStatus {
+    
+    AuditStatusUnknown = 0;
+    Unaudited = 1;
+    Auditing = 2;
+    Approved = 3;
+    Refused = 4;
+}
+
+// 数据使用类型
+enum DataUseType {
+    
+    DataUseTypeUnknown = 0;
+    Download = 1;
+    Api = 2;
+    OnlineView = 3;
+}
+
+// 任务状态
+enum TaskStatus {
+    
+    TaskStatusUnknown = 0;
+    Submitted = 1;
+    Running = 2;
+    RunningSuccess = 3;
+    RunningFail = 4;
+    AuditAuditing = 5;
+    AuditApproved = 6;
+    AuditRefused = 7;
+    ResultAuditing = 8;
+    ResultAuditApproved = 9;
+    ResultAuditRefused = 10;
+    Deleted = 11;
+}
+

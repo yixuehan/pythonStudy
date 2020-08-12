@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.1)
+project(cmake_test)
+add_executable(main main.cpp)
+add_subdirectory(a)
+add_subdirectory(b)
