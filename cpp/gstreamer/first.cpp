@@ -1,4 +1,5 @@
 #include <gst/gst.h>
+#include <stdio.h>
 
 int
 main (int argc, char *argv[])
@@ -17,6 +18,21 @@ main (int argc, char *argv[])
     ("playbin uri=rtsp://admin:admin@192.168.1.108:554/cam/realmonitor?channel=1&subtype=0", 
       NULL);
 
+  GstElement *sink;
+  g_object_get(pipeline, "video-sink", &sink, nullptr);
+  printf("get sink %p\n", sink);
+
+  sink = gst_element_factory_make("ximagesink", "sink");
+  printf("make sink %p\n", sink);
+  g_object_set(pipeline, "video-sink", sink, nullptr);
+  g_object_get(pipeline, "video-sink", &sink, nullptr);
+  printf("get sink %p\n", sink);
+
+  sink = gst_element_factory_make("ximagesink", "sink");
+  printf("make sink %p\n", sink);
+  g_object_set(pipeline, "video-sink", sink, nullptr);
+  g_object_get(pipeline, "video-sink", &sink, nullptr);
+  printf("%p\n", sink);
   /* Start playing */
   gst_element_set_state (pipeline, GST_STATE_PLAYING);
 

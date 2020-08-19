@@ -1,9 +1,11 @@
-project(gstreamer)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0.1)
+project(gst LANGUAGES CXX)
 add_compile_options(-ggdb)
 
 # include_directories(/usr/include/gstreamer-1.0)
-include(FindPkgConfig)
+# include(FindPkgConfig)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+find_package(PkgConfig REQUIRED)
 pkg_search_module(GSTREAMER REQUIRED gstreamer-1.0)
 
 message(STATUS "gstreamer include:" ${GSTREAMER_INCLUDE_DIRS})

@@ -10,8 +10,18 @@
 # gst-launch-1.0 rtspsrc "location=rtsp://admin:admin@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" ! rtph264depay ! h264parse ! openh264dec ! d3dvideosink
 # gst-launch-1.0 rtspsrc "location=rtsp://admin:admin@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" ! rtph264depay ! h264parse ! mp4mux ! filesink location=./rtsp.h264
 # gst-launch-1.0 rtspsrc latency=2000 location="rtsp://admin:admin123456@192.168.1.108/cam/realmonitor?channel=1&subtype=1" ! rtph264depay ! queue ! h264parse ! nvv4l2decoder ! fakesink
-gst-launch-1.0 rtspsrc "location=rtsp://admin:admin123456@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" short-header=true ! rtph264depay ! queue ! h264parse ! avdec_h264 ! autovideosink sync=false
+# gst-launch-1.0 rtspsrc "location=rtsp://admin:admin123456@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" short-header=true ! rtph264depay ! queue ! h264parse ! avdec_h264 ! autovideosink sync=false
 # gst-launch-1.0 rtspsrc latency=2000 location="rtsp://admin:admin@192.168.1.108" ! rtph264depay ! queue ! h264parse ! nvv4l2decoder ! fakesink
 # gst-launch-1.0 rtspsrc "location=rtsp://admin:admin123456@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" ! rtph264depay ! h264parse ! avdec_h264 ! autovideosink
 # gst-launch-1.0 rtspsrc debug=1 location="rtsp://admin:admin123456@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" ! decodebin ! queue ! fakesink
 # gst-launch-1.0 rtspsrc location="rtsp://admin:admin123456@192.168.1.108:554/cam/realmonitor?channel=1&subtype=1" ! avmux_rtsp! autovideosink
+# gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! autovideosink \
+#                v4l2src device=/dev/video2 ! videoconvert ! autovideosink \
+#                v4l2src device=/dev/video4 ! videoconvert ! autovideosink \
+#                v4l2src device=/dev/video6 ! videoconvert ! autovideosink \
+
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! autovideosink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video2 ! videoconvert ! autovideosink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video4 ! videoconvert ! autovideosink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video6 ! videoconvert ! autovideosink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video8 ! videoconvert ! autovideosink sync=false &

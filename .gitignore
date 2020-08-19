@@ -20,3 +20,4 @@ python/to_class_view/*.txt
 **/*.mp3
 **/*.mov
 **/*.wav
+**/*.txt.user
