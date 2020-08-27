@@ -1,0 +1,29 @@
+{
+    "rtsp_list": {},
+    "usb_list": {
+        "/dev/video0": {
+            "fail": 0,
+            "index": 19,
+            "key": "/dev/video0",
+            "success": 10
+        },
+        "/dev/video1": {
+            "fail": 0,
+            "index": 22,
+            "key": "/dev/video1",
+            "success": 10
+        },
+        "/dev/video2": {
+            "fail": 1,
+            "index": 23,
+            "key": "/dev/video2",
+            "success": 9
+        },
+        "/dev/video3": {
+            "fail": 1,
+            "index": 25,
+            "key": "/dev/video3",
+            "success": 9
+        }
+    }
+}

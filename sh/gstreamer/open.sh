@@ -20,8 +20,8 @@
 #                v4l2src device=/dev/video4 ! videoconvert ! autovideosink \
 #                v4l2src device=/dev/video6 ! videoconvert ! autovideosink \
 
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! autovideosink sync=false &
-gst-launch-1.0 v4l2src device=/dev/video2 ! videoconvert ! autovideosink sync=false &
-gst-launch-1.0 v4l2src device=/dev/video4 ! videoconvert ! autovideosink sync=false &
-gst-launch-1.0 v4l2src device=/dev/video6 ! videoconvert ! autovideosink sync=false &
-gst-launch-1.0 v4l2src device=/dev/video8 ! videoconvert ! autovideosink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video0 ! "video/x-raw, width=(int)960, height=(int)540, framerate=(fraction)5/1" ! videoconvert ! xvimagesink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video1 ! "video/x-raw, width=(int)960, height=(int)540, framerate=(fraction)5/1" ! videoconvert ! xvimagesink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video2 ! "video/x-raw, width=(int)960, height=(int)540, framerate=(fraction)5/1" ! videoconvert ! xvimagesink sync=false &
+gst-launch-1.0 v4l2src device=/dev/video3 ! "video/x-raw, width=(int)960, height=(int)540, framerate=(fraction)5/1" ! videoconvert ! xvimagesink sync=false &
+# gst-launch-1.0 v4l2src device=/dev/video8 ! videoconvert ! autovideosink sync=false &
